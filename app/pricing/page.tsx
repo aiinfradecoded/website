@@ -1,9 +1,9 @@
 import { Check, Lock, Minus } from "lucide-react";
+import Link from "next/link";
 
 import { Container } from "@/app/_components/Container";
 import { Footer } from "@/app/_components/Footer";
 import { Nav } from "@/app/_components/Nav";
-import { APP_DEMO_URL } from "@/app/_lib/config";
 
 /**
  * Checkout URLs.
@@ -331,15 +331,15 @@ export default function PricingPage() {
             Still on the fence? Try the live demo.
           </h2>
           <p className="mt-3 text-zinc-400">
-            Free Clerk-authed access to the dashboard. No credit card. See the actual streaming chat + RAG before deciding.
+            Scripted preview of the streaming chat + markdown rendering. No sign-up. See the actual UI before deciding.
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
-            <a
-              href={APP_DEMO_URL}
+            <Link
+              href="/demo"
               className="rounded-lg bg-zinc-100 px-5 py-3 text-sm font-medium text-zinc-950 hover:bg-white"
             >
               Open the demo
-            </a>
+            </Link>
             <a
               href="mailto:team@aiinfradecoded.com"
               className="rounded-lg border border-zinc-800 bg-zinc-900/60 px-5 py-3 text-sm font-medium text-zinc-100 hover:border-zinc-700 hover:bg-zinc-900"

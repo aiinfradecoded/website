@@ -18,7 +18,6 @@ import { Container } from "@/app/_components/Container";
 import { Footer } from "@/app/_components/Footer";
 import { Nav } from "@/app/_components/Nav";
 import { TerminalMock } from "@/app/_components/TerminalMock";
-import { APP_DEMO_URL } from "@/app/_lib/config";
 
 const FEATURES = [
   {
@@ -147,12 +146,12 @@ export default function Home() {
                   Get AgentForge
                   <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </Link>
-                <a
-                  href={APP_DEMO_URL}
+                <Link
+                  href="/demo"
                   className="inline-flex items-center gap-2 rounded-lg border border-zinc-800/50 bg-zinc-900/40 px-5 py-3 text-sm font-medium text-zinc-100 transition hover:border-zinc-700 hover:bg-zinc-900"
                 >
                   Try the live demo
-                </a>
+                </Link>
               </div>
               <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs text-zinc-500">
                 <span className="inline-flex items-center gap-1.5">
@@ -453,12 +452,12 @@ export default function Home() {
                 >
                   Get AgentForge
                 </Link>
-                <a
-                  href={APP_DEMO_URL}
+                <Link
+                  href="/demo"
                   className="rounded-lg border border-zinc-800 bg-zinc-900/60 px-5 py-3 text-sm font-medium text-zinc-100 hover:border-zinc-700 hover:bg-zinc-900"
                 >
                   Try the live demo
-                </a>
+                </Link>
               </div>
             </div>
           </div>

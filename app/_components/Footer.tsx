@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { APP_DEMO_URL } from "../_lib/config";
 import { Logo } from "./Logo";
 
 export function Footer() {
@@ -29,7 +28,7 @@ export function Footer() {
             <li><Link href="/" className="hover:text-white">AgentForge</Link></li>
             <li><Link href="/pricing" className="hover:text-white">Pricing</Link></li>
             <li><Link href="/changelog" className="hover:text-white">Changelog</Link></li>
-            <li><a href={APP_DEMO_URL} className="hover:text-white">Live demo</a></li>
+            <li><Link href="/demo" className="hover:text-white">Live demo</Link></li>
           </ul>
         </div>
 

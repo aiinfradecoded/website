@@ -30,6 +30,7 @@ Open <http://localhost:3000>.
 |-------|---------|
 | `/` | Landing page |
 | `/pricing` | Hobby ($99) / Pro ($249) / Team — wired to Polar checkout |
+| `/demo` | Public scripted streaming-chat preview (no sign-up) |
 | `/about` | Brand + author background |
 | `/changelog` | Product changelog |
 | `/license` | Commercial license terms |
@@ -42,6 +43,5 @@ Deploys to Cloudflare Pages on push to `main`. Production URL: `https://aiinfrad
 
 Required production env vars (set in Cloudflare Pages dashboard):
 - `NEXT_PUBLIC_SITE_URL=https://aiinfradecoded.com`
-- `NEXT_PUBLIC_APP_URL=https://app.aiinfradecoded.com`
 - `NEXT_PUBLIC_POLAR_HOBBY_URL=<live Polar checkout URL>`
 - `NEXT_PUBLIC_POLAR_PRO_URL=<live Polar checkout URL>`

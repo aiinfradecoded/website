@@ -5,11 +5,10 @@ import { usePathname } from "next/navigation";
 
 import { Logo } from "./Logo";
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.aiinfradecoded.com";
-
 const links = [
   { href: "/about" as const, label: "About" },
   { href: "/pricing" as const, label: "Pricing" },
+  { href: "/demo" as const, label: "Demo" },
   { href: "/changelog" as const, label: "Changelog" },
 ];
 
@@ -39,12 +38,6 @@ export function Nav() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <a
-            href={`${APP_URL}/sign-in`}
-            className="hidden text-sm text-zinc-300 hover:text-zinc-100 sm:inline"
-          >
-            Sign in
-          </a>
           <Link
             href="/pricing"
             className="rounded-lg bg-zinc-100 px-3.5 py-1.5 text-sm font-medium text-zinc-950 transition hover:bg-white"
