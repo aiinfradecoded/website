@@ -74,17 +74,13 @@ export default function LicensePage() {
           </div>
 
           <h2 className="mt-14 font-serif text-2xl font-semibold tracking-tight">
-            Refunds &amp; updates
+            Updates
           </h2>
           <p className="mt-3 max-w-2xl text-zinc-400">
-            7-day refund window from purchase, no questions asked. Email
-            {" "}
-            <a href="mailto:team@aiinfradecoded.com" className="text-cyan-300 hover:text-cyan-200">
-              team@aiinfradecoded.com
-            </a>
-            {" "}
-            with your purchase ID. Updates included per your tier (Hobby = 90 days,
-            Pro = 1 year, Team = 1 year).
+            Updates are included per your tier: Hobby = 90 days of bug fixes,
+            Pro = 1 year of updates on the main branch, Team = 1 year of updates.
+            Major-version upgrades are a separate purchase at a discount for
+            existing customers.
           </p>
 
           <h2 className="mt-14 font-serif text-2xl font-semibold tracking-tight">

@@ -129,10 +129,6 @@ const FAQ: { q: string; a: string }[] = [
     a: "It includes the production-readiness items (real auth, real billing, deploy templates, rate limiting) that take 1-2 weekends to build right. The price reflects the time saved, not the lines of code.",
   },
   {
-    q: "Refund policy?",
-    a: "7 days, no questions asked. Email team@aiinfradecoded.com with your purchase ID. After 7 days the license is non-refundable since you've had access to the source.",
-  },
-  {
     q: "Updates after purchase?",
     a: "Hobby: bug fixes for 90 days post-purchase. Pro: 1 year of updates on the main branch. Major-version upgrades are a separate purchase at a discount for existing customers.",
   },
@@ -185,7 +181,7 @@ export default function PricingPage() {
               </li>
               <li className="inline-flex items-center gap-1.5">
                 <Check className="h-3.5 w-3.5 text-emerald-400" strokeWidth={2.5} />
-                You own the source · 7-day refund
+                You own the source
               </li>
             </ul>
           </Container>
@@ -261,8 +257,7 @@ export default function PricingPage() {
           </div>
           <p className="mt-8 text-center text-xs text-zinc-500">
             Polar handles all VAT, GST, and US sales tax compliance as the merchant
-            of record. Receipts arrive instantly. 7-day refund window, no questions
-            asked — email{" "}
+            of record. Receipts arrive instantly. Questions? Email{" "}
             <a
               href="mailto:team@aiinfradecoded.com"
               className="text-zinc-300 hover:text-zinc-100"

@@ -94,8 +94,8 @@ export default function ThanksPage() {
               </span>
             </div>
             <p className="mt-4 max-w-2xl text-zinc-400">
-              We read every message. Setup questions, refund requests, suggestions for
-              the kit — same inbox, same humans on the other end.
+              We read every message. Setup questions and suggestions for the kit —
+              same inbox, same humans on the other end.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
@@ -113,8 +113,7 @@ export default function ThanksPage() {
               </Link>
             </div>
             <p className="mt-6 text-xs text-zinc-500">
-              7-day refund window. No questions asked. The license file lives at the
-              root of the repo once you accept the invite.
+              The license file lives at the root of the repo once you accept the invite.
             </p>
           </div>
         </Container>

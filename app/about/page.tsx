@@ -132,11 +132,6 @@ export default function AboutPage() {
                 b:
                   "We don't accept sponsored mentions in product reviews or boilerplate comparisons. Affiliate disclosure on every link.",
               },
-              {
-                h: "Refunds without friction",
-                b:
-                  "7-day refund window on every purchase. No 'must export your data first' nonsense. Email us and it's done.",
-              },
             ].map((x) => (
               <article
                 key={x.h}

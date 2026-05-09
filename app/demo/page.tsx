@@ -124,9 +124,7 @@ This catches both "what does the customer mean" (semantic) and "they used the ex
 
 **Pro ($249)** also gives you the production-readiness items — real Clerk JWKS verification, Stripe + Polar webhook implementations, deploy templates, rate limiting, and 1 year of updates on the main branch.
 
-**What you're NOT paying for:** an open-source license. The kit is source-available with a commercial license — you can use it in unlimited paid client work, fold it into a SaaS, modify it however you want. You just can't repackage and resell the unmodified kit itself.
-
-7-day refund window, no questions. If it doesn't save you the time, email and I'll refund it.`,
+**What you're NOT paying for:** an open-source license. The kit is source-available with a commercial license — you can use it in unlimited paid client work, fold it into a SaaS, modify it however you want. You just can't repackage and resell the unmodified kit itself.`,
   },
 };
 
