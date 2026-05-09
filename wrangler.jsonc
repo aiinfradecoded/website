@@ -1,0 +1,13 @@
+{
+  // Cloudflare Workers Static Assets — serves the Next.js static export at
+  // aiinfradecoded.com. No server logic, just edge-cached HTML/CSS/JS.
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "aiinfradecoded",
+  "compatibility_date": "2025-05-09",
+  "assets": {
+    // `pnpm build` writes static output here (next.config.mjs has output: "export").
+    "directory": "./out",
+    // Serve /404.html for unknown routes (Next.js generates this automatically).
+    "not_found_handling": "404-page"
+  }
+}

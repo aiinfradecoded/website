@@ -6,6 +6,8 @@ import { Footer } from "@/app/_components/Footer";
 import { Logo } from "@/app/_components/Logo";
 import { Nav } from "@/app/_components/Nav";
 
+import { OrderRef } from "./OrderRef";
+
 export const metadata = {
   title: "Thanks — your AgentForge purchase",
   description:
@@ -13,16 +15,7 @@ export const metadata = {
   robots: { index: false, follow: false },
 };
 
-interface PageProps {
-  searchParams: Promise<{ checkout_id?: string }>;
-}
-
-export default async function ThanksPage({ searchParams }: PageProps) {
-  const { checkout_id } = await searchParams;
-  const orderRef = checkout_id
-    ? `${checkout_id.slice(0, 8)}…${checkout_id.slice(-6)}`
-    : null;
-
+export default function ThanksPage() {
   return (
     <>
       <Nav />
@@ -41,11 +34,7 @@ export default async function ThanksPage({ searchParams }: PageProps) {
               Your purchase went through. Your receipt should already be in your inbox
               from Polar. Here&apos;s what happens next.
             </p>
-            {orderRef && (
-              <p className="mt-3 font-mono text-xs text-zinc-500">
-                Order ref · {orderRef}
-              </p>
-            )}
+            <OrderRef />
           </Container>
         </section>
 
