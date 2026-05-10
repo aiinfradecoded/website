@@ -69,6 +69,38 @@ const TRUST_LOGOS = [
   { name: "pytest", version: "8" },
 ];
 
+const AUDIENCES = [
+  {
+    icon: Sparkles,
+    title: "Indie SaaS founders",
+    body: "Skip the 1-2 weekends of plumbing every AI app needs. Ship the actual product.",
+  },
+  {
+    icon: Zap,
+    title: "Senior engineers tired of the OpenAI bill",
+    body: "Same code path runs keyless on Ollama or vLLM. Drop a $300/mo bill to $0.",
+  },
+  {
+    icon: GitFork,
+    title: "Consultants shipping AI for clients",
+    body: "A vetted base for every engagement. Commercial license covers unlimited paid work.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Teams owning their AI infra",
+    body: "Source-available, fork-friendly, no telemetry, audit the whole stack end-to-end.",
+  },
+];
+
+const BUILD_IT_YOURSELF = [
+  "Clerk JWKS verification with caching — 1 weekend",
+  "Multi-turn streaming chat over SSE — 1 weekend",
+  "Hybrid pgvector + pg_trgm RAG — 1 weekend",
+  "Polar/Stripe webhooks with idempotency — 1 weekend",
+  "Per-plan rate limiting + observability — 1 weekend",
+  "LLM-judge eval harness + CI gate — 1 weekend",
+];
+
 const STATS = [
   { value: "360+", label: "tests in the suite", note: "Unit + integration + edge case" },
   { value: "<90 min", label: "to deployed app", note: "From clone to first prompt" },
@@ -179,6 +211,41 @@ export default function Home() {
         </Container>
       </section>
 
+      {/* Who this is for — qualifying hook, above-the-fold-adjacent */}
+      <section className="py-16 sm:py-20">
+        <Container size="lg">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-cyan-400">
+              Who this is for
+            </span>
+            <h2 className="mt-3 text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+              If you&apos;ve been here before, you already know what this saves.
+            </h2>
+            <p className="mt-4 text-pretty text-zinc-400">
+              Auth. Streaming. RAG. Billing. Eval. Observability. Six things every AI
+              product needs before it&apos;s real. AgentForge ships all six wired and
+              tested, so you spend your weekend on the part that actually differentiates.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {AUDIENCES.map(({ icon: Icon, title, body }) => (
+              <article
+                key={title}
+                className="rounded-xl border border-zinc-800/50 bg-zinc-950/40 p-6"
+              >
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-800/50 bg-zinc-900 text-cyan-400">
+                  <Icon className="h-5 w-5" strokeWidth={1.75} />
+                </span>
+                <h3 className="mt-4 font-serif text-base font-semibold text-zinc-100">
+                  {title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400">{body}</p>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </section>
+
       {/* Stats row */}
       <section className="py-16">
         <Container size="lg">
@@ -192,6 +259,97 @@ export default function Home() {
                 <div className="mt-0.5 text-xs text-zinc-500">{s.note}</div>
               </div>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Value math — the cost comparison that justifies the price */}
+      <section className="py-20 sm:py-24">
+        <Container size="md">
+          <div className="mx-auto max-w-2xl text-center">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-cyan-400">
+              The math
+            </span>
+            <h2 className="mt-3 text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+              Building this yourself: 6 weekends.
+            </h2>
+            <p className="mt-4 text-pretty text-zinc-400">
+              Every AI product needs the same six production patterns. At typical
+              senior rates, that&apos;s <span className="text-zinc-200">$4,000–$10,000</span>{" "}
+              of your own time before your customer types their first prompt.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-5 lg:grid-cols-2">
+            <div className="rounded-2xl border border-zinc-800/60 bg-zinc-950/40 p-7">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-500">
+                <Database className="h-4 w-4" strokeWidth={1.75} />
+                Build it yourself
+              </div>
+              <h3 className="mt-3 font-serif text-2xl font-semibold tracking-tight text-zinc-100">
+                6 weekends of plumbing
+              </h3>
+              <ul className="mt-5 space-y-2.5 text-sm text-zinc-400">
+                {BUILD_IT_YOURSELF.map((line) => (
+                  <li key={line} className="flex items-start gap-2.5">
+                    <span aria-hidden className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-700" />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 border-t border-zinc-800/60 pt-5">
+                <div className="font-serif text-3xl font-semibold tracking-tight text-zinc-100">
+                  $4,000–$10,000
+                </div>
+                <div className="mt-1 text-xs text-zinc-500">
+                  Your own time, before any customer revenue
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-cyan-500/[0.05] via-zinc-950 to-zinc-950 p-7 accent-glow">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-cyan-400">
+                <Sparkles className="h-4 w-4" strokeWidth={1.75} />
+                Buy AgentForge
+              </div>
+              <h3 className="mt-3 font-serif text-2xl font-semibold tracking-tight text-zinc-100">
+                90 minutes, source delivered
+              </h3>
+              <ul className="mt-5 space-y-2.5 text-sm text-zinc-300">
+                {[
+                  "All six patterns wired and tested across 360+ tests",
+                  "Full source under a commercial license — fork freely",
+                  "Bring your own keys, or keyless on Ollama / vLLM",
+                  "No subscription, no per-seat fees, no API keys of ours",
+                  "Run on your infra — Hetzner, your laptop, Cloudflare Tunnel",
+                  "Pro adds production-readiness + 1 year of updates",
+                ].map((line) => (
+                  <li key={line} className="flex items-start gap-2.5">
+                    <CheckCircle2
+                      className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400"
+                      strokeWidth={2.25}
+                    />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 border-t border-cyan-500/20 pt-5">
+                <div className="font-serif text-3xl font-semibold tracking-tight text-zinc-100">
+                  $99 <span className="text-zinc-500">or</span> $249
+                  <span className="ml-2 text-base font-normal text-zinc-500">once</span>
+                </div>
+                <div className="mt-1 text-xs text-zinc-500">
+                  98–99% off the build-it-yourself number
+                </div>
+              </div>
+              <Link
+                href="/pricing"
+                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-zinc-100 px-5 py-3 text-sm font-medium text-zinc-950 transition hover:bg-white"
+              >
+                See pricing
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </Container>
       </section>
