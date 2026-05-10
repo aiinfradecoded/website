@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" fill="none" aria-label="AI Infra Decoded">
+  <defs>
+    <linearGradient id="aid-grad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+    <linearGradient id="aid-fill" x1="0" y1="0" x2="0" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0e1116"/>
+      <stop offset="100%" stop-color="#0a0d12"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="38" height="38" rx="9" fill="url(#aid-fill)" stroke="url(#aid-grad)" stroke-width="1.2"/>
+  <path d="M9 11 L31 11 L20 30 Z" stroke="url(#aid-grad)" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+  <line x1="14.5" y1="17" x2="25.5" y2="17" stroke="url(#aid-grad)" stroke-width="1.6" stroke-linecap="round"/>
+  <line x1="16.5" y1="21" x2="23.5" y2="21" stroke="url(#aid-grad)" stroke-width="1.6" stroke-linecap="round"/>
+  <line x1="18.5" y1="25" x2="21.5" y2="25" stroke="url(#aid-grad)" stroke-width="1.6" stroke-linecap="round"/>
+</svg>
