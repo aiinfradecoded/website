@@ -1,7 +1,6 @@
 import {
   ArrowUpRight,
   Boxes,
-  CalendarClock,
   CheckCircle2,
   CircuitBoard,
   Database,
@@ -16,6 +15,7 @@ import Link from "next/link";
 
 import { Container } from "@/app/_components/Container";
 import { Footer } from "@/app/_components/Footer";
+import { Logo } from "@/app/_components/Logo";
 import { Nav } from "@/app/_components/Nav";
 import { TerminalMock } from "@/app/_components/TerminalMock";
 
@@ -73,41 +73,27 @@ const STATS = [
   { value: "360+", label: "tests in the suite", note: "Unit + integration + edge case" },
   { value: "<90 min", label: "to deployed app", note: "From clone to first prompt" },
   { value: "$0", label: "infra cost in dev", note: "Local Ollama + Postgres" },
-  { value: "1 LLC", label: "single license", note: "Unlimited internal projects" },
+  { value: "Lifetime", label: "v1.x patches", note: "Bug fixes shipped into the same repo" },
 ];
 
-const ROADMAP = [
+const TRUST_PILLARS = [
   {
-    quarter: "Shipped · v1.0",
-    tone: "shipped",
-    items: [
-      "Tier-routed LLM with frontier fallback",
-      "Multi-turn streaming chat persisted to Postgres",
-      "Hybrid pgvector + pg_trgm search",
-      "Clerk JWKS verification + dev-mode toggle",
-      "Stripe + Polar webhook entitlement",
-      "LLM-judge eval harness with CI gate",
-    ],
+    icon: Lock,
+    title: "Zero vendor lock-in",
+    body:
+      "Bring your own API keys (Anthropic, OpenAI, Gemini), or run keyless on Ollama / vLLM. Your infrastructure, your data, your control.",
   },
   {
-    quarter: "Q1 2026 · v1.1",
-    tone: "soon",
-    items: [
-      "Settings page (model tier, BYO API keys, usage)",
-      "Markdown render for assistant messages",
-      "Mobile dashboard layout (sidebar → bottom sheet)",
-      "Per-plan rate limiting middleware",
-    ],
+    icon: ShieldCheck,
+    title: "Privacy-first by design",
+    body:
+      "No telemetry sent back to us. Your prompts, conversations, and customer data stay on the stack you deploy. Source-available, fully auditable.",
   },
   {
-    quarter: "Q2 2026 · v1.2",
-    tone: "later",
-    items: [
-      "Hetzner / Vercel / Fly.io one-click deploy templates",
-      "Multi-tenant org support",
-      "Audit log + SOC2-ready trail",
-      "Webhook event replay UI",
-    ],
+    icon: GitFork,
+    title: "Patches, included",
+    body:
+      "Every fix and improvement ships into the same source repo. Pro tier adds 1 year of feature updates on the main branch.",
   },
 ];
 
@@ -329,102 +315,47 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Roadmap */}
-      <section className="py-20 sm:py-24">
-        <Container size="md">
-          <div className="flex items-baseline justify-between gap-4">
-            <div>
-              <span className="inline-block text-xs font-semibold uppercase tracking-widest text-cyan-400">
-                Roadmap
-              </span>
-              <h2 className="mt-3 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-                Public roadmap, no vapor.
-              </h2>
-              <p className="mt-3 text-zinc-400">
-                Every item ships into the same repo. Lifetime patches included with v1.x.
-              </p>
-            </div>
-            <CalendarClock className="hidden h-8 w-8 text-cyan-400/60 sm:block" />
-          </div>
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
-            {ROADMAP.map((col) => (
-              <div
-                key={col.quarter}
-                className={`rounded-xl border p-6 ${
-                  col.tone === "shipped"
-                    ? "border-cyan-500/30 bg-cyan-500/[0.03]"
-                    : col.tone === "soon"
-                    ? "border-zinc-800/50 bg-zinc-900/40"
-                    : "border-zinc-800/50 bg-zinc-950/40"
-                }`}
-              >
-                <div className="flex items-center gap-2 text-sm font-semibold text-zinc-100">
-                  {col.tone === "shipped" ? (
-                    <CheckCircle2 className="h-4 w-4 text-cyan-400" />
-                  ) : (
-                    <span
-                      className={`h-1.5 w-1.5 rounded-full ${
-                        col.tone === "soon" ? "bg-amber-400" : "bg-zinc-600"
-                      }`}
-                    />
-                  )}
-                  {col.quarter}
-                </div>
-                <ul className="mt-4 space-y-2.5 text-sm text-zinc-300">
-                  {col.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span
-                        className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${
-                          col.tone === "shipped" ? "bg-cyan-400" : "bg-zinc-600"
-                        }`}
-                      />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-          <p className="mt-6 text-xs text-zinc-500">
-            Want a roadmap item moved up? Email{" "}
-            <a href="mailto:team@aiinfradecoded.com" className="text-zinc-300 hover:text-zinc-100">
-              team@aiinfradecoded.com
-            </a>
-            . Customer requests reorder the queue.
-          </p>
-        </Container>
-      </section>
-
-      {/* What's NOT in v1 — reframed as transparency */}
+      {/* From the maker — brand anchor + trust pillars */}
       <section className="surface-alt py-20 sm:py-24">
         <Container size="md">
-          <div className="rounded-2xl border border-zinc-800/50 bg-gradient-to-br from-zinc-900/60 to-zinc-950 p-8 sm:p-10">
+          <div className="rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/[0.04] via-zinc-950 to-zinc-950 p-8 sm:p-12 accent-glow">
             <div className="flex items-center gap-3">
-              <Lock className="h-5 w-5 text-zinc-400" strokeWidth={1.75} />
-              <h2 className="font-serif text-xl font-semibold tracking-tight">
-                What's deliberately NOT in v1
-              </h2>
+              <Logo size={48} />
+              <div>
+                <h3 className="font-serif text-xl font-semibold tracking-tight text-zinc-100">
+                  AI Infra Decoded
+                </h3>
+                <p className="mt-0.5 text-[11px] uppercase tracking-widest text-zinc-500">
+                  Atlanta · est. 2026
+                </p>
+              </div>
             </div>
-            <p className="mt-3 text-zinc-400">
-              We document what's missing so you know what you're buying time for. Each item
-              is enumerated in <code className="font-mono text-zinc-300">docs/TODO.md</code>{" "}
-              with an implementation hint.
+
+            <h2 className="mt-10 text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+              Built like infrastructure you&apos;d ship yourself.
+            </h2>
+            <p className="mt-4 max-w-2xl text-pretty text-zinc-400">
+              AgentForge is what we put in front of our own production traffic. Same code
+              path, same tests, same observability — packaged so a senior engineer can have
+              it running on their own infra inside an afternoon.
             </p>
-            <ul className="mt-6 grid gap-3 text-sm text-zinc-300 sm:grid-cols-2">
-              {[
-                "Multi-tenant org support (single workspace v1)",
-                "Hetzner / Vercel deploy templates (manual for now)",
-                "Audit log + SOC2 trail (planned for v1.2)",
-                "Webhook event replay UI (in roadmap)",
-                "Anthropic-style structured tool schemas (planned)",
-                "Realtime collaborative editing (out of scope for v1)",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-2.5">
-                  <span aria-hidden className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-600" />
-                  <span>{item}</span>
-                </li>
+
+            <div className="mt-10 grid gap-5 sm:grid-cols-3">
+              {TRUST_PILLARS.map(({ icon: Icon, title, body }) => (
+                <div
+                  key={title}
+                  className="rounded-xl border border-zinc-800/50 bg-zinc-950/40 p-6"
+                >
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-800/50 bg-zinc-900 text-cyan-400">
+                    <Icon className="h-5 w-5" strokeWidth={1.75} />
+                  </span>
+                  <h3 className="mt-4 font-serif text-base font-semibold text-zinc-100">
+                    {title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-400">{body}</p>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </Container>
       </section>

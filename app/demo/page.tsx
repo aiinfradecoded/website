@@ -1,6 +1,19 @@
 "use client";
 
-import { ArrowUpRight, Lock, Send, Sparkles } from "lucide-react";
+import {
+  ArrowUpRight,
+  CheckCircle2,
+  Database,
+  GaugeCircle,
+  Layers,
+  Lock,
+  Minus,
+  Rocket,
+  Send,
+  ShieldCheck,
+  Sparkles,
+  Users,
+} from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -9,6 +22,84 @@ import { Footer } from "@/app/_components/Footer";
 import { MessageBubble } from "@/app/_components/MessageBubble";
 import { Nav } from "@/app/_components/Nav";
 import type { ChatMessage } from "@/app/_lib/types";
+
+const CAPABILITIES = [
+  {
+    icon: Sparkles,
+    title: "Streaming chat with persistence",
+    body:
+      "Multi-turn conversations over SSE, persisted to your Postgres on every turn. Replayable, auditable, and survives reconnects. Drop-in for support assistants, copilots, or internal tools.",
+  },
+  {
+    icon: Database,
+    title: "Hybrid RAG, no third parties",
+    body:
+      "pgvector cosine + pg_trgm trigram search blended into one query. Documents in, semantic + lexical matches out. No Pinecone bill, no cross-region calls, no extra moving parts.",
+  },
+  {
+    icon: Layers,
+    title: "Tier-routed LLM with fallback",
+    body:
+      "Three tiers (local-small / local-large / frontier) routed through LiteLLM. Frontier outage? Drops to local automatically. Same code path whether you bring API keys or run keyless on Ollama / vLLM.",
+  },
+  {
+    icon: GaugeCircle,
+    title: "LLM-judge eval harness",
+    body:
+      "Golden inputs and a judge-prompt evaluator wired to pytest. CI gate fails the build if your pass-rate drops more than 5%. Confidence to refactor your prompts and ship.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Production auth + billing",
+    body:
+      "Clerk JWKS verification with cached keys. Polar + Stripe webhooks with idempotent fulfillment and audit logs. Real production patterns, not dev-mode placeholders.",
+  },
+  {
+    icon: Rocket,
+    title: "Docker Compose + observability",
+    body:
+      "Postgres + pgvector + Ollama up with one command. Self-hosted Langfuse traces every LLM call for cost and latency. Your prompts never leave your infra.",
+  },
+];
+
+const USE_CASES = [
+  {
+    title: "Indie SaaS founders",
+    body:
+      "Skip 1-2 weekends of plumbing. Ship your AI product on a foundation that already handles auth, billing, streaming, RAG, and rate limiting.",
+  },
+  {
+    title: "Senior engineers replacing $300+/mo OpenAI bills",
+    body:
+      "Run the same code path locally on Ollama or vLLM. Same UI, same eval suite, same database — minus the per-token cost.",
+  },
+  {
+    title: "Consultants shipping AI for clients",
+    body:
+      "Each engagement starts with a vetted, tested base. Commercial license covers unlimited paid client work; no need to rebuild the boring 80% on every project.",
+  },
+  {
+    title: "Teams owning their AI infra",
+    body:
+      "Source-available, fork-friendly, no telemetry sent back. Audit the entire data flow. Deploy where you want — Hetzner, your own datacenter, or stay on the home box behind Cloudflare Tunnel.",
+  },
+];
+
+const TIER_DIFF: { label: string; hobby: boolean | string; pro: boolean | string }[] = [
+  { label: "Full source code under commercial license", hobby: true, pro: true },
+  { label: "Streaming chat + multi-turn persistence", hobby: true, pro: true },
+  { label: "Hybrid pgvector + pg_trgm RAG", hobby: true, pro: true },
+  { label: "LLM-judge eval harness", hobby: true, pro: true },
+  { label: "Docker Compose local stack", hobby: true, pro: true },
+  { label: "Self-hosted Langfuse observability", hobby: true, pro: true },
+  { label: "Production Clerk JWKS verification", hobby: false, pro: true },
+  { label: "Stripe + Polar webhook implementations", hobby: false, pro: true },
+  { label: "Per-plan rate limiting middleware", hobby: false, pro: true },
+  { label: "Hetzner / Vercel / Fly.io deploy templates", hobby: false, pro: true },
+  { label: "24-prompt library (sales, content, eval)", hobby: false, pro: true },
+  { label: "Updates duration", hobby: "90 days", pro: "1 year" },
+  { label: "Priority email support (24h response)", hobby: false, pro: true },
+];
 
 /**
  * Public preview of the AgentForge streaming chat. Uses scripted, deterministic
@@ -311,6 +402,116 @@ export default function DemoPage() {
           </p>
         </Container>
 
+        {/* What the kit actually does */}
+        <Container size="md" className="pb-12">
+          <div className="text-center">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-cyan-400">
+              What you get
+            </span>
+            <h2 className="mt-3 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+              Six production patterns, wired once.
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-pretty text-zinc-400">
+              The streaming chat above is one slice. Here&apos;s everything that ships in
+              the kit — the same code we run in our own production.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2">
+            {CAPABILITIES.map(({ icon: Icon, title, body }) => (
+              <article
+                key={title}
+                className="rounded-xl border border-zinc-800/50 bg-zinc-950/40 p-6"
+              >
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-800/50 bg-zinc-900 text-cyan-400">
+                  <Icon className="h-5 w-5" strokeWidth={1.75} />
+                </span>
+                <h3 className="mt-4 font-serif text-lg font-semibold text-zinc-100">
+                  {title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-zinc-400">{body}</p>
+              </article>
+            ))}
+          </div>
+        </Container>
+
+        {/* Who this is for */}
+        <Container size="md" className="pb-12">
+          <div className="rounded-2xl border border-zinc-800/50 bg-zinc-900/30 p-8 sm:p-10">
+            <div className="flex items-center gap-3">
+              <Users className="h-5 w-5 text-cyan-400" strokeWidth={1.75} />
+              <h2 className="font-serif text-2xl font-semibold tracking-tight">
+                Who this is for
+              </h2>
+            </div>
+            <p className="mt-3 max-w-2xl text-zinc-400">
+              AgentForge is built for senior engineers who&apos;d rather skip the boilerplate
+              and start shipping. If you&apos;ve already spent a weekend wiring auth, streaming,
+              or webhook signatures by hand, you know the value of getting it right once.
+            </p>
+            <div className="mt-8 grid gap-5 sm:grid-cols-2">
+              {USE_CASES.map((u) => (
+                <div key={u.title} className="flex items-start gap-3">
+                  <CheckCircle2
+                    className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400"
+                    strokeWidth={2}
+                  />
+                  <div>
+                    <h3 className="font-serif text-base font-semibold text-zinc-100">
+                      {u.title}
+                    </h3>
+                    <p className="mt-1 text-sm leading-relaxed text-zinc-400">{u.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
+
+        {/* Hobby vs Pro — the real differences */}
+        <Container size="md" className="pb-20">
+          <div className="text-center">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-cyan-400">
+              Hobby vs Pro
+            </span>
+            <h2 className="mt-3 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+              What the extra <span className="text-cyan-300">$150</span> buys you.
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-pretty text-zinc-400">
+              Both tiers ship the full source code. Pro adds the production-readiness
+              layer you&apos;d otherwise spend two weekends building yourself, plus the
+              prompt library and a year of updates.
+            </p>
+          </div>
+          <div className="mt-10 overflow-hidden rounded-xl border border-zinc-800/50">
+            <table className="w-full text-sm">
+              <thead className="bg-zinc-900/60 text-zinc-400">
+                <tr>
+                  <th className="px-5 py-3 text-left font-medium">Feature</th>
+                  <th className="px-5 py-3 text-center font-medium">
+                    Hobby <span className="font-mono text-zinc-500">· $99</span>
+                  </th>
+                  <th className="px-5 py-3 text-center font-medium text-cyan-300">
+                    Pro <span className="font-mono text-cyan-500">· $249</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-zinc-800/60">
+                {TIER_DIFF.map((row) => (
+                  <tr key={row.label} className="text-zinc-300">
+                    <td className="px-5 py-3">{row.label}</td>
+                    <Cell value={row.hobby} />
+                    <Cell value={row.pro} accent />
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-6 text-center text-xs text-zinc-500">
+            Both tiers include a one-time purchase under our source-available commercial
+            license — no subscription, no per-seat fees, no API keys of ours in the loop.
+          </p>
+        </Container>
+
         <Container size="md" className="pb-20">
           <div className="rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 via-zinc-950 to-zinc-950 p-8 sm:p-10">
             <h2 className="font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
@@ -367,6 +568,32 @@ function EmptyState({ onPick }: { onPick: (prompt: string) => void }) {
         ))}
       </div>
     </div>
+  );
+}
+
+function Cell({ value, accent }: { value: boolean | string; accent?: boolean }) {
+  if (typeof value === "string") {
+    return (
+      <td
+        className={`px-5 py-3 text-center text-xs ${
+          accent ? "text-cyan-300" : "text-zinc-300"
+        }`}
+      >
+        {value}
+      </td>
+    );
+  }
+  return (
+    <td className="px-5 py-3 text-center">
+      {value ? (
+        <CheckCircle2
+          className={`mx-auto h-4 w-4 ${accent ? "text-cyan-400" : "text-zinc-300"}`}
+          strokeWidth={2.5}
+        />
+      ) : (
+        <Minus className="mx-auto h-4 w-4 text-zinc-700" strokeWidth={2.5} />
+      )}
+    </td>
   );
 }
 
