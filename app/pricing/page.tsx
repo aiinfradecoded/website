@@ -126,7 +126,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Why is Pro $249?",
-    a: "It includes the production-readiness items (real auth, real billing, deploy templates, rate limiting) that take 1-2 weekends to build right. The price reflects the time saved, not the lines of code.",
+    a: "It includes the production-readiness items (real auth, real billing, deploy templates, rate limiting) that take 1-2 weeks to build right. The price reflects the time saved, not the lines of code.",
   },
   {
     q: "Updates after purchase?",

@@ -73,7 +73,7 @@ const AUDIENCES = [
   {
     icon: Sparkles,
     title: "Indie SaaS founders",
-    body: "Skip the 1-2 weekends of plumbing every AI app needs. Ship the actual product.",
+    body: "Skip the 1-2 weeks of plumbing every AI app needs. Ship the actual product.",
   },
   {
     icon: Zap,
@@ -93,12 +93,12 @@ const AUDIENCES = [
 ];
 
 const BUILD_IT_YOURSELF = [
-  "Clerk JWKS verification with caching — 1 weekend",
-  "Multi-turn streaming chat over SSE — 1 weekend",
-  "Hybrid pgvector + pg_trgm RAG — 1 weekend",
-  "Polar/Stripe webhooks with idempotency — 1 weekend",
-  "Per-plan rate limiting + observability — 1 weekend",
-  "LLM-judge eval harness + CI gate — 1 weekend",
+  "Clerk JWKS verification with caching — 1 week",
+  "Multi-turn streaming chat over SSE — 1 week",
+  "Hybrid pgvector + pg_trgm RAG — 1 week",
+  "Polar/Stripe webhooks with idempotency — 1 week",
+  "Per-plan rate limiting + observability — 1 week",
+  "LLM-judge eval harness + CI gate — 1 week",
 ];
 
 const STATS = [
@@ -224,7 +224,7 @@ export default function Home() {
             <p className="mt-4 text-pretty text-zinc-400">
               Auth. Streaming. RAG. Billing. Eval. Observability. Six things every AI
               product needs before it&apos;s real. AgentForge ships all six wired and
-              tested, so you spend your weekend on the part that actually differentiates.
+              tested, so you spend your time on the part that actually differentiates.
             </p>
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -271,7 +271,7 @@ export default function Home() {
               The math
             </span>
             <h2 className="mt-3 text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-              Building this yourself: 6 weekends.
+              Building this yourself: 6 weeks.
             </h2>
             <p className="mt-4 text-pretty text-zinc-400">
               Every AI product needs the same six production patterns. At typical
@@ -287,7 +287,7 @@ export default function Home() {
                 Build it yourself
               </div>
               <h3 className="mt-3 font-serif text-2xl font-semibold tracking-tight text-zinc-100">
-                6 weekends of plumbing
+                6 weeks of plumbing
               </h3>
               <ul className="mt-5 space-y-2.5 text-sm text-zinc-400">
                 {BUILD_IT_YOURSELF.map((line) => (

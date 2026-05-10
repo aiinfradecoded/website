@@ -66,7 +66,7 @@ const USE_CASES = [
   {
     title: "Indie SaaS founders",
     body:
-      "Skip 1-2 weekends of plumbing. Ship your AI product on a foundation that already handles auth, billing, streaming, RAG, and rate limiting.",
+      "Skip 1-2 weeks of plumbing. Ship your AI product on a foundation that already handles auth, billing, streaming, RAG, and rate limiting.",
   },
   {
     title: "Senior engineers replacing $300+/mo OpenAI bills",
@@ -209,9 +209,9 @@ This catches both "what does the customer mean" (semantic) and "they used the ex
     durationMs: 3000,
     content: `Honest answer: you're paying for time, not lines of code.
 
-**The math:** every senior engineer wires the same six things on day one of an AI project — auth, billing webhooks, streaming chat, RAG, eval harness, observability. Each of those is one to two weekends to do correctly. Six features × 1.5 weekends average × your hourly rate = $4k–$10k of your own time.
+**The math:** every senior engineer wires the same six things on day one of an AI project — auth, billing webhooks, streaming chat, RAG, eval harness, observability. Each of those is one to two weeks to do correctly. Six features × 1.5 weeks average × your hourly rate = $4k–$10k of your own time.
 
-**Hobby ($99)** gives you the source code with everything wired and tested. You skip the wiring weekend.
+**Hobby ($99)** gives you the source code with everything wired and tested. You skip the wiring weeks.
 
 **Pro ($249)** also gives you the production-readiness items — real Clerk JWKS verification, Stripe + Polar webhook implementations, deploy templates, rate limiting, and 1 year of updates on the main branch.
 
@@ -445,7 +445,7 @@ export default function DemoPage() {
             </div>
             <p className="mt-3 max-w-2xl text-zinc-400">
               AgentForge is built for senior engineers who&apos;d rather skip the boilerplate
-              and start shipping. If you&apos;ve already spent a weekend wiring auth, streaming,
+              and start shipping. If you&apos;ve already spent a week wiring auth, streaming,
               or webhook signatures by hand, you know the value of getting it right once.
             </p>
             <div className="mt-8 grid gap-5 sm:grid-cols-2">
@@ -478,7 +478,7 @@ export default function DemoPage() {
             </h2>
             <p className="mx-auto mt-3 max-w-2xl text-pretty text-zinc-400">
               Both tiers ship the full source code. Pro adds the production-readiness
-              layer you&apos;d otherwise spend two weekends building yourself, plus the
+              layer you&apos;d otherwise spend two weeks building yourself, plus the
               prompt library and a year of updates.
             </p>
           </div>
