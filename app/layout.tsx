@@ -44,9 +44,33 @@ export const metadata: Metadata = {
   },
 };
 
+// JSON-LD Organization schema — tells Google we're a known organization
+// with a logo. Required for the logo to appear in search results next to
+// our listing. https://developers.google.com/search/docs/appearance/structured-data/logo
+const ORG_LD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "AI Infra Decoded",
+  alternateName: "AgentForge",
+  url: "https://aiinfradecoded.com",
+  logo: "https://aiinfradecoded.com/logo.png",
+  description:
+    "Production AI infrastructure for senior engineers. Source-available boilerplate (AgentForge) with FastAPI + Next.js 15 + pgvector.",
+  sameAs: [
+    "https://github.com/aiinfradecoded",
+  ],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${sans.variable} ${mono.variable} ${serif.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_LD) }}
+        />
+      </head>
       <body className="min-h-screen antialiased">{children}</body>
     </html>
   );
