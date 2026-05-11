@@ -34,6 +34,10 @@ html, body {
   font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Belt-and-suspenders: clip any accidental horizontal overflow so mobile
+     never gets a horizontal scrollbar. Layout-level fixes (min-w-0 on grid
+     items, responsive font sizes) handle the real issue; this is a safety net. */
+  overflow-x: hidden;
 }
 
 body {

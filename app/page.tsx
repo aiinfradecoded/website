@@ -144,7 +144,7 @@ export default function Home() {
                 <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
                 AgentForge v1.0 · production-ready
               </span>
-              <h1 className="mt-6 text-balance font-serif text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
+              <h1 className="mt-6 text-balance font-serif text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
                 Production AI infrastructure,{" "}
                 <span className="bg-gradient-to-r from-cyan-300 to-cyan-500 bg-clip-text text-transparent">
                   decoded.
@@ -187,7 +187,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="lg:pl-6">
+            <div className="min-w-0 lg:pl-6">
               <TerminalMock />
             </div>
           </div>
