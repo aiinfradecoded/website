@@ -57,6 +57,7 @@ const TIERS: Tier[] = [
     tagline: "The full kit. One developer, unlimited side projects.",
     features: [
       "FastAPI + Next.js 15 source",
+      "1-command install & uninstall wizards",
       "Multi-turn chat + streaming SSE",
       "RAG: vector × trigram hybrid search",
       "LiteLLM tier router with frontier fallback",
@@ -136,6 +137,7 @@ const FAQ: { q: string; a: string }[] = [
 
 const FEATURE_MATRIX: { label: string; hobby: boolean | string; pro: boolean | string; team: boolean | string }[] = [
   { label: "FastAPI + Next.js 15 source code", hobby: true, pro: true, team: true },
+  { label: "Install + uninstall wizards", hobby: true, pro: true, team: true },
   { label: "Multi-turn streaming chat", hobby: true, pro: true, team: true },
   { label: "Hybrid RAG (vector + trigram)", hobby: true, pro: true, team: true },
   { label: "Eval harness", hobby: true, pro: true, team: true },

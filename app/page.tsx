@@ -428,11 +428,16 @@ export default function Home() {
         <Container size="md">
           <div className="text-center">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest text-cyan-400">
-              From clone to deployed
+              From clone to chatting in &lt;8 minutes
             </span>
             <h2 className="mt-3 text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-              Three commands. No build-tool fights.
+              One command. A browser-based wizard handles the rest.
             </h2>
+            <p className="mt-4 mx-auto max-w-xl text-pretty text-sm text-zinc-400">
+              The wizard auto-detects Docker / Node / Python / Git, asks for your API keys
+              (or lets you skip and add them later), and streams the install live. Includes
+              a matching uninstall wizard for clean teardown.
+            </p>
           </div>
           <ol className="mt-14 space-y-6">
             {[
@@ -440,19 +445,19 @@ export default function Home() {
                 num: "01",
                 title: "Clone the repo",
                 cmd: "git clone https://github.com/aiinfradecoded/agentforge-starter && cd agentforge-starter",
-                body: "Source-available repo, yours under a single-LLC commercial license. Customize without restriction.",
+                body: "Source-available repo, yours under a single-developer commercial license. Customize without restriction.",
               },
               {
                 num: "02",
-                title: "Bring up the stack",
-                cmd: "docker compose up -d  # postgres + pgvector + ollama",
-                body: "Postgres 16 + pgvector + your local LLM via Ollama. No cloud signup required to develop.",
+                title: "Run the setup wizard",
+                cmd: "bash start.sh    # macOS / Linux\n.\\start.ps1      # Windows PowerShell",
+                body: "Opens a browser-based wizard on localhost:7777. Prereq check, API keys, install — all live with a progress bar. Skip keys if you want; the dashboard will prompt you to finish later.",
               },
               {
                 num: "03",
-                title: "Backend + frontend",
-                cmd: "make dev  # uvicorn + next dev, both watching",
-                body: "Backend on :8000, frontend on :3000. Sign up via Clerk and start chatting in 90 seconds.",
+                title: "Open the dashboard",
+                cmd: "# Wizard auto-opens http://localhost:3000",
+                body: "Sign in via Clerk and start chatting. Don't like it? `bash uninstall.sh` walks you back out with the same UI.",
               },
             ].map((step) => (
               <li
@@ -464,7 +469,7 @@ export default function Home() {
                 </span>
                 <div>
                   <h3 className="font-serif text-lg font-semibold text-zinc-100">{step.title}</h3>
-                  <pre className="codeblock mt-2">{step.cmd}</pre>
+                  <pre className="codeblock mt-2 whitespace-pre">{step.cmd}</pre>
                   <p className="mt-2 text-sm text-zinc-400">{step.body}</p>
                 </div>
               </li>
