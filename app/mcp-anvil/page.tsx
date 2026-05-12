@@ -365,6 +365,9 @@ export default function McpAnvilPage() {
                 >
                   Get personal — $29
                 </Link>
+                <p className="mt-2 text-center text-[11px] text-zinc-500">
+                  14-day refund, no questions
+                </p>
               </div>
 
               {/* Team */}
@@ -396,6 +399,9 @@ export default function McpAnvilPage() {
                 >
                   Get team — $99
                 </Link>
+                <p className="mt-2 text-center text-[11px] text-zinc-500">
+                  14-day refund, no questions
+                </p>
               </div>
             </div>
             <p className="mt-8 text-center text-xs text-zinc-500">
@@ -411,7 +417,10 @@ export default function McpAnvilPage() {
               {[
                 { value: "21", label: "audit rules", note: "12 static + 9 runtime" },
                 { value: "3", label: "transports", note: "stdio · streamable-http · sse" },
-                { value: "<2s", label: "audit median", note: "on a typical 5-tool server" },
+                // Replaced the unverified "<2s audit median" claim — depends
+                // entirely on the audited server. This stat is defensible
+                // (matches the citations on the receipts section above).
+                { value: "2", label: "arXiv papers", note: "every rule is sourced" },
               ].map((stat) => (
                 <div
                   key={stat.label}
