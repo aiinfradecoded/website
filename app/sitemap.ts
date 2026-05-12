@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const pages = [
     { path: "/", priority: 1.0, changeFrequency: "weekly" as const },
-    { path: "/mcp-forge", priority: 0.95, changeFrequency: "weekly" as const },
+    { path: "/mcp-anvil", priority: 0.95, changeFrequency: "weekly" as const },
     { path: "/pricing", priority: 0.9, changeFrequency: "monthly" as const },
     { path: "/demo", priority: 0.9, changeFrequency: "monthly" as const },
     { path: "/about", priority: 0.7, changeFrequency: "monthly" as const },

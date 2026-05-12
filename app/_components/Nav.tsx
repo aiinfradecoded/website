@@ -9,7 +9,7 @@ import { Logo } from "./Logo";
 
 const links = [
   { href: "/" as const, label: "Home" },
-  { href: "/mcp-forge" as const, label: "MCP Forge" },
+  { href: "/mcp-anvil" as const, label: "MCP Anvil" },
   { href: "/about" as const, label: "About" },
   { href: "/pricing" as const, label: "Pricing" },
   { href: "/demo" as const, label: "Demo" },

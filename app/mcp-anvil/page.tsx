@@ -16,31 +16,31 @@ import { Nav } from "@/app/_components/Nav";
 // Polar checkout links. Set per environment via the marketing-site env vars;
 // fall back to mailto for the period before the checkout SKUs exist.
 const POLAR_PERSONAL_URL =
-  process.env.NEXT_PUBLIC_POLAR_MCPFORGE_PERSONAL_URL ||
+  process.env.NEXT_PUBLIC_POLAR_MCPANVIL_PERSONAL_URL ||
   "mailto:hello@aiinfradecoded.com?subject=MCP%20Forge%20Personal%20(%2429)";
 const POLAR_TEAM_URL =
-  process.env.NEXT_PUBLIC_POLAR_MCPFORGE_TEAM_URL ||
+  process.env.NEXT_PUBLIC_POLAR_MCPANVIL_TEAM_URL ||
   "mailto:hello@aiinfradecoded.com?subject=MCP%20Forge%20Team%20(%2499)";
 
 const COMMANDS = [
   {
     icon: FileText,
     badge: "Free",
-    name: "mcp-forge new <name>",
+    name: "mcp-anvil new <name>",
     blurb:
       "Scaffold a complete MCP server in Python or TypeScript. Working sample tool, manifest, tests, Dockerfile, README — all real, all FastMCP-based, runs immediately. Free forever.",
   },
   {
     icon: ShieldAlert,
     badge: "Paid",
-    name: "mcp-forge audit <path>",
+    name: "mcp-anvil audit <path>",
     blurb:
       "21 rules across two phases. Static rules read the manifest (auth gaps, lookalike tool names, hardcoded secrets, missing schemas). Runtime probes boot the server in a sandbox and check the MCP handshake, tools/list consistency, response-size budgets, Windows stream-buffering. Opt-in adversarial fuzzing.",
   },
   {
     icon: Terminal,
     badge: "Paid",
-    name: "mcp-forge inspect <path>",
+    name: "mcp-anvil inspect <path>",
     blurb:
       "Live tool playground at localhost:7800. Auto-renders forms from each tool's input schema, fires calls, shows request/response timelines with latency. Stop guessing what your MCP host sees.",
   },
@@ -70,11 +70,11 @@ const SOURCES = [
 const FAQ = [
   {
     q: "Why pay for a CLI? Anthropic ships MCP Inspector free.",
-    a: "Inspector is bare-bones — it lets you click tools, that's it. MCP Forge ships the scaffolder (auto-generates the boring 200 lines every server reinvents), a real security audit grounded in published fault taxonomies, and a playground with run history, latency, and form-driven UX. Inspector is a starting block; this is the toolbox.",
+    a: "Inspector is bare-bones — it lets you click tools, that's it. MCP Anvil ships the scaffolder (auto-generates the boring 200 lines every server reinvents), a real security audit grounded in published fault taxonomies, and a playground with run history, latency, and form-driven UX. Inspector is a starting block; this is the toolbox.",
   },
   {
     q: "What's a license, technically?",
-    a: "Ed25519-signed JSON. Buyer pastes a base32 blob into `mcp-forge license activate`. The CLI verifies the signature against an embedded public key locally — no network call on the happy path. 30-day offline grace after the weekly revocation check.",
+    a: "Ed25519-signed JSON. Buyer pastes a base32 blob into `mcp-anvil license activate`. The CLI verifies the signature against an embedded public key locally — no network call on the happy path. 30-day offline grace after the weekly revocation check.",
   },
   {
     q: "Source-available or closed binary?",
@@ -90,7 +90,7 @@ const FAQ = [
   },
 ];
 
-export default function McpForgePage() {
+export default function McpAnvilPage() {
   return (
     <>
       <Nav />
@@ -104,7 +104,7 @@ export default function McpForgePage() {
                 Now in alpha · early-adopter pricing
               </div>
               <h1 className="text-balance font-serif text-4xl font-semibold tracking-tight sm:text-5xl">
-                MCP Forge —
+                MCP Anvil —
                 <br />
                 <span className="text-cyan-400">the missing toolbox</span>
                 <br />
@@ -139,19 +139,19 @@ export default function McpForgePage() {
             <pre className="mt-16 overflow-x-auto rounded-xl border border-zinc-800/70 bg-zinc-950 p-6 font-mono text-[13px] leading-relaxed text-zinc-300">
               <span className="text-zinc-500"># 1. Scaffold a working server (free)</span>
               {"\n"}
-              <span className="text-cyan-400">$</span> mcp-forge new my-server
+              <span className="text-cyan-400">$</span> mcp-anvil new my-server
               {"\n"}
               {"\n"}
               <span className="text-zinc-500"># 2. Audit before you ship (paid)</span>
               {"\n"}
-              <span className="text-cyan-400">$</span> mcp-forge audit ./my-server
+              <span className="text-cyan-400">$</span> mcp-anvil audit ./my-server
               {"\n"}
               <span className="text-zinc-500">  ✓ Audit passed · 0 errors · 0 warnings</span>
               {"\n"}
               {"\n"}
               <span className="text-zinc-500"># 3. Play with tools live (paid)</span>
               {"\n"}
-              <span className="text-cyan-400">$</span> mcp-forge inspect ./my-server
+              <span className="text-cyan-400">$</span> mcp-anvil inspect ./my-server
               {"\n"}
               <span className="text-zinc-500">  Playground http://localhost:7800</span>
             </pre>
@@ -270,7 +270,7 @@ export default function McpForgePage() {
                 </p>
                 <ul className="mt-6 space-y-2.5 text-sm">
                   {[
-                    "mcp-forge new (Python + TypeScript)",
+                    "mcp-anvil new (Python + TypeScript)",
                     "Working sample tools, manifest, tests",
                     "Dockerfile included",
                     "Demo mode for audit + inspect",
@@ -300,8 +300,8 @@ export default function McpForgePage() {
                 </p>
                 <ul className="mt-6 space-y-2.5 text-sm">
                   {[
-                    "mcp-forge audit (21 rules, HTML report)",
-                    "mcp-forge inspect (live playground)",
+                    "mcp-anvil audit (21 rules, HTML report)",
+                    "mcp-anvil inspect (live playground)",
                     "1 developer · 1 year of updates",
                     "Run anywhere — offline-friendly",
                   ].map((f) => (
@@ -450,7 +450,7 @@ export default function McpForgePage() {
 }
 
 export const metadata = {
-  title: "MCP Forge — scaffold, audit, inspect Model Context Protocol servers",
+  title: "MCP Anvil — scaffold, audit, inspect Model Context Protocol servers",
   description:
     "The missing toolbox for MCP server authors. One CLI: scaffold a server, run a 21-rule security audit, open a live tool playground. $29 personal, $99 team.",
 };
