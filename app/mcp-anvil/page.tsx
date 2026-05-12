@@ -135,8 +135,56 @@ export default function McpAnvilPage() {
               </p>
             </div>
 
-            {/* Hero terminal block */}
-            <pre className="mt-16 overflow-x-auto rounded-xl border border-zinc-800/70 bg-zinc-950 p-6 font-mono text-[13px] leading-relaxed text-zinc-300">
+            {/*
+              Hero visual — actual audit-output mock. This is what a buyer
+              sees when they run `mcp-anvil audit` on a real-world server.
+              Static HTML mirror of the v0.1.2 terminal format (stanza per
+              finding, colored severity labels, arrow-prefixed suggestions).
+            */}
+            <div className="mt-14 mx-auto max-w-3xl">
+              <div className="rounded-xl border border-zinc-800/70 bg-zinc-950 shadow-2xl shadow-cyan-500/[0.05] overflow-hidden">
+                {/* Fake terminal chrome — three dots + title */}
+                <div className="flex items-center gap-2 border-b border-zinc-800/70 bg-zinc-900/60 px-4 py-2.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-green-500/70" />
+                  <span className="ml-3 font-mono text-[11px] text-zinc-500">
+                    ~/my-server — mcp-anvil audit .
+                  </span>
+                </div>
+                {/* Audit findings — mirrors the real terminal output */}
+                <pre className="px-6 py-5 font-mono text-[12.5px] leading-[1.7] text-zinc-300">
+                  <span className="font-semibold text-zinc-100">MCP Anvil audit findings</span>{"\n"}
+                  <span className="text-zinc-500">13 static · 9 runtime · 1.42s</span>{"\n"}
+                  <span className="text-zinc-700">────────────────────────────────────────────────────</span>{"\n"}
+                  <span className="font-bold text-red-400"> ERR</span>{"  "}
+                  <span className="text-cyan-400">static.security.hardcoded_secret</span>{"\n"}
+                  {"      "}<span className="font-semibold text-zinc-100">Possible secret in manifest field &apos;env.OPENAI_KEY&apos;</span>{"\n"}
+                  {"      "}<span className="text-zinc-500">Value contains &apos;sk-proj-&apos;-shaped string.</span>{"\n"}
+                  {"      "}<span className="text-cyan-400">-&gt; Move to an env var; manifests get checked into git.</span>{"\n\n"}
+                  <span className="font-bold text-yellow-400">WARN</span>{"  "}
+                  <span className="text-cyan-400">static.tools.name_collision</span>{"\n"}
+                  {"      "}<span className="font-semibold text-zinc-100">Lookalike tool names</span>{"\n"}
+                  {"      "}<span className="text-zinc-500">&apos;Search&apos; and &apos;search&apos; differ only by case.</span>{"\n"}
+                  {"      "}<span className="text-cyan-400">-&gt; Rename to make the distinction obvious.</span>{"\n\n"}
+                  <span className="font-bold text-cyan-400">INFO</span>{"  "}
+                  <span className="text-cyan-400">static.limits.no_response_budget</span>{"\n"}
+                  {"      "}<span className="font-semibold text-zinc-100">No response-size budget documented</span>{"\n"}
+                  {"      "}<span className="text-zinc-500">Hostile tool result can exhaust host context window.</span>{"\n"}
+                  {"      "}<span className="text-cyan-400">-&gt; Add &apos;limits&apos;: {`{`} &apos;responseBytes&apos;: 1048576 {`}`}</span>{"\n"}
+                  <span className="text-zinc-700">────────────────────────────────────────────────────</span>{"\n"}
+                  <span className="font-bold text-red-400">1 error</span>{"  "}
+                  <span className="font-bold text-yellow-400">1 warning</span>{"  "}
+                  <span className="font-bold text-cyan-400">1 info</span>{"\n"}
+                </pre>
+              </div>
+              <p className="mt-3 text-center text-xs text-zinc-500">
+                Real output. 21-rule audit, ~1.5s on a typical server.
+              </p>
+            </div>
+
+            {/* Three-command quickstart block (below the audit visual) */}
+            <pre className="mt-12 overflow-x-auto rounded-xl border border-zinc-800/70 bg-zinc-950 p-6 font-mono text-[13px] leading-relaxed text-zinc-300">
               <span className="text-zinc-500"># 1. Scaffold a working server (free)</span>
               {"\n"}
               <span className="text-cyan-400">$</span> mcp-anvil new my-server
