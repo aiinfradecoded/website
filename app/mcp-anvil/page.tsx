@@ -97,7 +97,7 @@ export default function McpAnvilPage() {
       <main>
         {/* Hero */}
         <section className="surface-hero py-20 sm:py-28">
-          <Container size="md">
+          <Container size="lg">
             <div className="text-center">
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/[0.06] px-3 py-1 text-xs font-medium text-cyan-300">
                 <Sparkles className="h-3 w-3" strokeWidth={2.25} />
@@ -160,7 +160,7 @@ export default function McpAnvilPage() {
 
         {/* Commands */}
         <section id="commands" className="surface-alt py-20 sm:py-24">
-          <Container size="md">
+          <Container size="lg">
             <div className="text-center">
               <span className="inline-block text-xs font-semibold uppercase tracking-widest text-cyan-400">
                 Three commands
@@ -201,7 +201,7 @@ export default function McpAnvilPage() {
 
         {/* Receipts: arXiv sources */}
         <section className="py-20 sm:py-24">
-          <Container size="md">
+          <Container size="lg">
             <div className="text-center">
               <span className="inline-block text-xs font-semibold uppercase tracking-widest text-cyan-400">
                 Grounded in receipts
@@ -243,7 +243,7 @@ export default function McpAnvilPage() {
 
         {/* Pricing */}
         <section className="surface-alt py-20 sm:py-24">
-          <Container size="md">
+          <Container size="lg">
             <div className="text-center">
               <span className="inline-block text-xs font-semibold uppercase tracking-widest text-cyan-400">
                 Pricing
@@ -358,7 +358,7 @@ export default function McpAnvilPage() {
 
         {/* Stats */}
         <section className="py-16">
-          <Container size="md">
+          <Container size="lg">
             <div className="grid gap-6 sm:grid-cols-3">
               {[
                 { value: "21", label: "audit rules", note: "12 static + 9 runtime" },
@@ -384,7 +384,7 @@ export default function McpAnvilPage() {
 
         {/* FAQ */}
         <section className="surface-alt py-20 sm:py-24">
-          <Container size="md">
+          <Container size="lg">
             <div className="text-center">
               <span className="inline-block text-xs font-semibold uppercase tracking-widest text-cyan-400">
                 FAQ
@@ -416,7 +416,7 @@ export default function McpAnvilPage() {
 
         {/* CTA */}
         <section className="py-20 sm:py-24">
-          <Container size="md">
+          <Container size="lg">
             <div className="rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-cyan-500/[0.06] via-zinc-950 to-zinc-950 p-10 text-center sm:p-14">
               <Gauge className="mx-auto h-8 w-8 text-cyan-400" strokeWidth={1.75} />
               <h2 className="mt-4 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">

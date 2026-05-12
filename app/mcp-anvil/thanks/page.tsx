@@ -33,16 +33,18 @@ export default function ThanksPage() {
             </div>
 
             <div className="mt-12 grid gap-4 sm:grid-cols-3">
-              {/* What's happening now */}
+              {/* What's happening now — under-promise on timing so we
+                  over-deliver. Was "within the next hour" but realistically
+                  it's whenever Nick checks email; 4 hours is the safer cap. */}
               <div className="rounded-xl border border-zinc-800/70 bg-zinc-900/40 p-6">
                 <Clock className="h-5 w-5 text-cyan-400" strokeWidth={1.75} />
                 <h3 className="mt-3 text-sm font-semibold text-zinc-100">
-                  Within the next hour
+                  Usually within 4 hours
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-zinc-400">
                   We&apos;ll send your activation key to the email you used at
                   checkout. The first cohort gets keys issued by hand — that&apos;s
-                  by design.
+                  by design, and the wait is deliberate.
                 </p>
               </div>
 
@@ -56,8 +58,8 @@ export default function ThanksPage() {
                   <code className="rounded bg-zinc-950 px-1.5 py-0.5 text-xs text-cyan-400">
                     hello@aiinfradecoded.com
                   </code>
-                  . If nothing lands in 2 hours, reply to your Polar receipt and
-                  we&apos;ll resend.
+                  . If nothing lands within 8 hours, reply to your Polar
+                  receipt and we&apos;ll resend within the day.
                 </p>
               </div>
 

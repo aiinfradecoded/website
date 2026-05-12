@@ -66,12 +66,26 @@ export function Nav() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link
-            href="/pricing"
-            className="hidden rounded-lg bg-zinc-100 px-3.5 py-1.5 text-sm font-medium text-zinc-950 transition hover:bg-white sm:inline-flex"
-          >
-            Get AgentForge
-          </Link>
+          {/*
+            Context-aware top-right CTA: a buyer on /mcp-anvil shouldn't see a
+            "Get AgentForge" button — that's cross-selling away from the page
+            they came for. Same logic for any future product page.
+          */}
+          {pathname?.startsWith("/mcp-anvil") ? (
+            <Link
+              href="/mcp-anvil#pricing"
+              className="hidden rounded-lg bg-cyan-500 px-3.5 py-1.5 text-sm font-semibold text-zinc-950 transition hover:bg-cyan-400 sm:inline-flex"
+            >
+              Get MCP Anvil
+            </Link>
+          ) : (
+            <Link
+              href="/pricing"
+              className="hidden rounded-lg bg-zinc-100 px-3.5 py-1.5 text-sm font-medium text-zinc-950 transition hover:bg-white sm:inline-flex"
+            >
+              Get AgentForge
+            </Link>
+          )}
 
           {/* Mobile hamburger */}
           <button
