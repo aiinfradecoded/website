@@ -5,6 +5,7 @@ import { Nav } from "@/app/_components/Nav";
 export const metadata = {
   title: "Privacy",
   description: "AI Infra Decoded privacy practices for the demo and customer accounts.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {

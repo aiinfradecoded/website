@@ -5,6 +5,7 @@ import { Nav } from "@/app/_components/Nav";
 export const metadata = {
   title: "Changelog",
   description: "Release notes for AI Infra Decoded products — MCP Anvil + AgentForge.",
+  alternates: { canonical: "/changelog" },
 };
 
 interface Release {

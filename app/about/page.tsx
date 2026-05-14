@@ -10,7 +10,8 @@ import { Nav } from "@/app/_components/Nav";
 export const metadata = {
   title: "About",
   description:
-    "AI Infra Decoded is a small Atlanta-based team shipping production AI infrastructure that works with your API keys (or none). Research, tooling, and AgentForge.",
+    "AI Infra Decoded is a small Atlanta-based team shipping production AI infrastructure. MCP Anvil for MCP server tooling, AgentForge for production agent stacks.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

@@ -5,6 +5,7 @@ import { Nav } from "@/app/_components/Nav";
 export const metadata = {
   title: "License",
   description: "AgentForge commercial source-available license terms.",
+  alternates: { canonical: "/license" },
 };
 
 export default function LicensePage() {

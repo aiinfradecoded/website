@@ -5,6 +5,13 @@ import { Container } from "@/app/_components/Container";
 import { Footer } from "@/app/_components/Footer";
 import { Nav } from "@/app/_components/Nav";
 
+export const metadata = {
+  title: "Pricing",
+  description:
+    "Pricing for AI Infra Decoded products. MCP Anvil: $29 personal / $99 team. AgentForge: source-available, one-time license.",
+  alternates: { canonical: "/pricing" },
+};
+
 /**
  * Checkout URLs.
  *

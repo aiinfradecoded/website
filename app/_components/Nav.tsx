@@ -7,13 +7,18 @@ import { useEffect, useState } from "react";
 
 import { Logo } from "./Logo";
 
+// Product links live at the top of the order so the two flagship pages
+// (MCP Anvil + AgentForge) are the first thing the buyer scans after the
+// brand mark. Demo lives under AgentForge conceptually (the demo IS the
+// AgentForge chat surface). Everything else trails after.
 const links = [
   { href: "/" as const, label: "Home" },
   { href: "/mcp-anvil" as const, label: "MCP Anvil" },
-  { href: "/about" as const, label: "About" },
+  { href: "/agentforge" as const, label: "AgentForge" },
   { href: "/pricing" as const, label: "Pricing" },
   { href: "/demo" as const, label: "Demo" },
   { href: "/changelog" as const, label: "Changelog" },
+  { href: "/about" as const, label: "About" },
 ];
 
 export function Nav() {
@@ -67,23 +72,26 @@ export function Nav() {
 
         <div className="flex items-center gap-3">
           {/*
-            Context-aware top-right CTA: a buyer on /mcp-anvil shouldn't see a
-            "Get AgentForge" button — that's cross-selling away from the page
-            they came for. Same logic for any future product page.
+            Context-aware top-right CTA. Three states:
+              - on /agentforge: "Get AgentForge" (zinc-white CTA)
+              - on /mcp-anvil:  "Get MCP Anvil"  (cyan primary CTA)
+              - elsewhere:      "Get MCP Anvil"  (cyan — flagship default)
+            Cross-page selling stays disabled — a buyer on a product page
+            never sees a button pulling them to the OTHER product.
           */}
-          {pathname?.startsWith("/mcp-anvil") ? (
+          {pathname?.startsWith("/agentforge") ? (
             <Link
-              href="/mcp-anvil#pricing"
-              className="hidden rounded-lg bg-cyan-500 px-3.5 py-1.5 text-sm font-semibold text-zinc-950 transition hover:bg-cyan-400 sm:inline-flex"
-            >
-              Get MCP Anvil
-            </Link>
-          ) : (
-            <Link
-              href="/pricing"
+              href="/agentforge#pricing"
               className="hidden rounded-lg bg-zinc-100 px-3.5 py-1.5 text-sm font-medium text-zinc-950 transition hover:bg-white sm:inline-flex"
             >
               Get AgentForge
+            </Link>
+          ) : (
+            <Link
+              href={pathname?.startsWith("/mcp-anvil") ? "/mcp-anvil#pricing" : "/mcp-anvil"}
+              className="hidden rounded-lg bg-cyan-500 px-3.5 py-1.5 text-sm font-semibold text-zinc-950 transition hover:bg-cyan-400 sm:inline-flex"
+            >
+              Get MCP Anvil
             </Link>
           )}
 
@@ -122,10 +130,10 @@ export function Nav() {
               </Link>
             ))}
             <Link
-              href="/pricing"
-              className="mt-2 inline-flex items-center justify-center rounded-lg bg-zinc-100 px-3.5 py-2.5 text-sm font-medium text-zinc-950 transition hover:bg-white"
+              href="/mcp-anvil"
+              className="mt-2 inline-flex items-center justify-center rounded-lg bg-cyan-500 px-3.5 py-2.5 text-sm font-semibold text-zinc-950 transition hover:bg-cyan-400"
             >
-              Get AgentForge
+              Get MCP Anvil
             </Link>
           </nav>
         </div>

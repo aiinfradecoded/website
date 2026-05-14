@@ -731,4 +731,5 @@ export const metadata = {
   title: "MCP Anvil — a local MCP toolbox with 64 built-in tools",
   description:
     "Local MCP daemon + browser dashboard + 64 built-in tools. Import servers from Claude Desktop / Code / Cursor with one click. One CLI. $29 personal, $99 team.",
+  alternates: { canonical: "/mcp-anvil" },
 };
