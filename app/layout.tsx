@@ -118,7 +118,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(AGENTFORGE_LD) }}
         />
       </head>
-      <body className="min-h-screen antialiased">{children}</body>
+      <body className="min-h-screen antialiased">
+        {/*
+          Site-wide grid background. Lives at the body level so every page
+          inherits it without per-page wiring (was previously per-section,
+          which left utility pages like /license and /privacy without the
+          treatment). Fixed positioning means the grid stays anchored as
+          the buyer scrolls — same effect the dashboard uses.
+
+          The mask radial-gradient in globals.css keeps the grid soft +
+          centered on the top-middle of the viewport so it never competes
+          with text. pointer-events-none + aria-hidden so it doesn't
+          interfere with content or screen readers.
+        */}
+        <div className="pointer-events-none fixed inset-0 -z-10 grid-bg-page" aria-hidden />
+        {children}
+      </body>
     </html>
   );
 }
