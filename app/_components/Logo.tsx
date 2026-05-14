@@ -6,9 +6,9 @@ interface Props {
 /**
  * AI Infra Decoded mark — a stylized nabla (∇), the gradient operator from
  * vector calculus and the canonical symbol of machine-learning gradient
- * descent. Three horizontal "decoded layers" nest inside the triangle,
- * suggesting structured output emerging from a learned function. Cyan-to-teal
- * gradient on a dark rounded square. Renders crisp at any size.
+ * descent. Empty triangle (no interior lines) — the geometry stays pure
+ * and the mark reads cleanly at every size. Cyan-to-teal gradient on a
+ * dark rounded square.
  */
 export function Logo({ className, size = 28 }: Props) {
   return (
@@ -42,41 +42,13 @@ export function Logo({ className, size = 28 }: Props) {
         stroke="url(#aid-grad)"
         strokeWidth="1.2"
       />
-      {/* ∇ — bold outline nabla / gradient operator */}
+      {/* ∇ — bold outline nabla / gradient operator. Empty interior. */}
       <path
         d="M9 11 L31 11 L20 30 Z"
         stroke="url(#aid-grad)"
         strokeWidth="2.2"
         strokeLinejoin="round"
         fill="none"
-      />
-      {/* Three decoded layers nested inside, each fitting the triangle's narrowing width */}
-      <line
-        x1="14.5"
-        y1="17"
-        x2="25.5"
-        y2="17"
-        stroke="url(#aid-grad)"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-      <line
-        x1="16.5"
-        y1="21"
-        x2="23.5"
-        y2="21"
-        stroke="url(#aid-grad)"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-      <line
-        x1="18.5"
-        y1="25"
-        x2="21.5"
-        y2="25"
-        stroke="url(#aid-grad)"
-        strokeWidth="1.6"
-        strokeLinecap="round"
       />
     </svg>
   );
