@@ -19,7 +19,6 @@ import {
 import Link from "next/link";
 
 import { Container } from "@/app/_components/Container";
-import { DashboardMockup } from "@/app/_components/DashboardMockup";
 import { Footer } from "@/app/_components/Footer";
 import { Logo } from "@/app/_components/Logo";
 import { Nav } from "@/app/_components/Nav";
@@ -159,11 +158,18 @@ export default function Home() {
               </div>
             </div>
 
-            {/* MCP Anvil dashboard mockup — pseudo-screenshot built from
-                HTML so it stays crisp + responsive + doesn't add to bundle
-                size. Same visual vocabulary as the actual dashboard
-                (cyan accents, monospaced server ids, serif H2). */}
-            <DashboardMockup />
+            {/* MCP Anvil dashboard hero — real screenshot captured via
+                Edge headless against the live daemon at 127.0.0.1:7820.
+                Sets the buyer's expectation visually: this is what you
+                get after `pip install mcp-anvil && mcp-anvil daemon start`. */}
+            <div className="min-w-0">
+              <img
+                src="/screenshots/dashboard.png"
+                alt="MCP Anvil dashboard — Servers tab showing anvil-builtin (64 tools) and anvil-custom under READY + DEFAULT badges, sidebar tabs for Tools / Templates / Saved Calls / Prompts / History / Events / Help."
+                className="w-full rounded-xl border border-zinc-800/70 shadow-2xl shadow-cyan-500/[0.06]"
+                loading="eager"
+              />
+            </div>
           </div>
         </Container>
       </section>

@@ -22,6 +22,7 @@ import { Footer } from "@/app/_components/Footer";
 import { MessageBubble } from "@/app/_components/MessageBubble";
 import { Nav } from "@/app/_components/Nav";
 import type { ChatMessage } from "@/app/_lib/types";
+import { McpAnvilMiniDemo } from "./McpAnvilMiniDemo";
 
 const CAPABILITIES = [
   {
@@ -318,14 +319,55 @@ export default function DemoPage() {
     <>
       <Nav />
       <main>
+        {/* MCP Anvil interactive demo — comes first since it's the
+            flagship product. Buyers can pick a tool, run it, and
+            even add a custom one — all client-side, no backend. */}
         <Container size="md" className="pt-12 pb-6">
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-cyan-400">
-            Public preview
-          </span>
-          <h1 className="mt-3 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-            Try the streaming chat.
-          </h1>
-          <p className="mt-3 max-w-2xl text-zinc-400">
+          <div className="flex items-baseline justify-between border-b border-zinc-800/60 pb-3">
+            <div>
+              <span className="inline-block text-[11px] font-semibold uppercase tracking-widest text-cyan-400">
+                Flagship · interactive
+              </span>
+              <h1 className="mt-1 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+                Poke at MCP Anvil right here.
+              </h1>
+            </div>
+          </div>
+          <p className="mt-4 max-w-2xl text-zinc-400">
+            A scaled-down sandbox of what you get at{" "}
+            <code className="font-mono text-zinc-300">localhost:7820</code> after install.
+            Pick a tool, fill in arguments, hit <strong className="text-zinc-200">Run</strong>.
+            Or click <strong className="text-zinc-200">+ New tool</strong> to add one yourself —
+            same flow as the real dashboard's tool-creation form, just sandboxed.
+          </p>
+          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-zinc-800/50 bg-zinc-900/40 px-3 py-1 text-xs text-zinc-400">
+            <Lock className="h-3 w-3" />
+            <span>No sign-up · runs entirely client-side</span>
+          </div>
+        </Container>
+
+        <Container size="md" className="pb-16">
+          <McpAnvilMiniDemo />
+          <p className="mt-4 text-center text-xs text-zinc-500">
+            The real product runs against your machine — real files, real
+            ports, real MCP servers. <Link href="/mcp-anvil" className="text-cyan-300 hover:text-cyan-200">See what's in the box →</Link>
+          </p>
+        </Container>
+
+        {/* Existing AgentForge chat demo — sits below the MCP Anvil
+            sandbox since AgentForge is the secondary product. */}
+        <Container size="md" className="pt-12 pb-6">
+          <div className="flex items-baseline justify-between border-b border-zinc-800/60 pb-3">
+            <div>
+              <span className="inline-block text-[11px] font-semibold uppercase tracking-widest text-zinc-400">
+                Agent stack · streaming chat
+              </span>
+              <h2 className="mt-1 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+                Try the AgentForge chat.
+              </h2>
+            </div>
+          </div>
+          <p className="mt-4 max-w-2xl text-zinc-400">
             This is the same UI shipped in <code className="font-mono text-zinc-300">/dashboard</code>{" "}
             after sign-up in the kit. Responses here come from a scripted set so the preview works without our
             backend running. The real version streams from your own LLM tier (local Ollama or a frontier provider).

@@ -21,9 +21,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-import { CliMockup } from "@/app/_components/CliMockup";
 import { Container } from "@/app/_components/Container";
-import { DashboardMockup } from "@/app/_components/DashboardMockup";
 import { Footer } from "@/app/_components/Footer";
 import { Nav } from "@/app/_components/Nav";
 
@@ -178,10 +176,6 @@ const FAQ = [
     a: "Yes. The Servers tab has an Import existing… button that reads your Claude Desktop / Claude Code / Cursor configs, lists every server it finds, and adds them with one click — env vars and all. stdio servers only for now; HTTP/SSE servers are flagged but not yet hostable.",
   },
   {
-    q: "What's actually free vs. paid?",
-    a: "Free: the scaffolder (mcp-anvil new) — it's the lead magnet, no license required, forever. Paid: audit, inspect, the daemon's full feature set, the dashboard. A 14-day trial unlocks everything on first run.",
-  },
-  {
     q: "Can I extend the built-in toolkit?",
     a: "Yes. The Tools tab has + New tool — pick a name, fill in a description, optionally paste Python, and the tool appears in anvil-custom immediately. The dashboard reloads the subprocess for you. Tool files live at ~/.mcp-anvil/tools/custom/.",
   },
@@ -200,10 +194,6 @@ const FAQ = [
   {
     q: "What about TypeScript? Rust? Go?",
     a: "Python and TypeScript scaffolds ship at v1. Rust and Go are queued. The built-in toolkit and dashboard work the same regardless — they hit any stdio MCP server.",
-  },
-  {
-    q: "Refund policy?",
-    a: "Email hello@aiinfradecoded.com within 14 days if it doesn't work for you — full refund, no questions. The 14-day full-feature trial usually answers this before money changes hands.",
   },
 ];
 
@@ -249,17 +239,17 @@ export default function McpAnvilPage() {
                 </Link>
               </div>
               <p className="mt-6 text-xs text-zinc-500">
-                14-day full-feature trial · no signup · works offline
+                Install in one command · works offline · no telemetry
               </p>
             </div>
 
             {/*
-              Hero visual — two surfaces side by side: CLI on the left,
-              dashboard on the right. Tells the buyer in one glance that
-              this is BOTH a terminal tool AND a browser dashboard, same
-              data behind both. The labels above each panel make the
-              point explicit ("CLI" / "Dashboard"). Stacks vertically on
-              narrow screens since both panels need horizontal room.
+              Hero visual — real screenshots of the two surfaces, side by
+              side. Left: actual CLI banner output captured from running
+              `mcp-anvil` and rendered as a terminal image. Right: real
+              browser screenshot of the dashboard at 127.0.0.1:7820 taken
+              with Edge headless. Both PNGs live in /public/screenshots/.
+              Stacks vertically on narrow screens.
             */}
             <div className="mt-14 grid gap-6 lg:grid-cols-2">
               <div>
@@ -267,14 +257,24 @@ export default function McpAnvilPage() {
                   <span className="h-px w-6 bg-cyan-500/40" />
                   CLI · in your terminal
                 </div>
-                <CliMockup />
+                <img
+                  src="/screenshots/cli.png"
+                  alt="MCP Anvil CLI banner — pixel-art anvil logo, version, daemon-running indicator, dashboard URL, and the four get-started commands."
+                  className="w-full rounded-xl border border-zinc-800/70 shadow-2xl shadow-cyan-500/[0.05]"
+                  loading="eager"
+                />
               </div>
               <div>
                 <div className="mb-2 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest text-zinc-500">
                   <span className="h-px w-6 bg-cyan-500/40" />
                   Dashboard · in your browser
                 </div>
-                <DashboardMockup />
+                <img
+                  src="/screenshots/dashboard.png"
+                  alt="MCP Anvil dashboard at 127.0.0.1:7820 — left sidebar with Servers, Tools, Templates, Saved Calls, Prompts, History, Events, Help. Servers tab shows anvil-builtin (64 tools) and anvil-custom, both flagged DEFAULT and READY."
+                  className="w-full rounded-xl border border-zinc-800/70 shadow-2xl shadow-cyan-500/[0.05]"
+                  loading="eager"
+                />
               </div>
             </div>
             <p className="mt-6 text-center text-xs text-zinc-500">
@@ -580,37 +580,13 @@ export default function McpAnvilPage() {
                 One-time. Yours forever.
               </h2>
               <p className="mt-4 mx-auto max-w-xl text-zinc-400">
-                14-day full-feature trial on first launch. After that, activate
-                a license or stick with the free scaffolder.
+                Two tiers. Pay once, install on your machine, no subscription.
+                Activate a license to unlock the daemon, dashboard, and full
+                toolkit.
               </p>
             </div>
 
-            <div className="mt-14 grid gap-6 sm:grid-cols-3">
-              {/* Free */}
-              <div className="rounded-2xl border border-zinc-800/70 bg-zinc-900/40 p-7">
-                <h3 className="font-serif text-xl font-semibold">Free</h3>
-                <div className="mt-2 flex items-baseline gap-1">
-                  <span className="text-4xl font-semibold">$0</span>
-                  <span className="text-sm text-zinc-500">forever</span>
-                </div>
-                <p className="mt-3 text-sm text-zinc-400">
-                  The scaffolder. Lead-magnet by design.
-                </p>
-                <ul className="mt-6 space-y-2.5 text-sm">
-                  {[
-                    "mcp-anvil new (Python + TypeScript)",
-                    "Working sample tools, manifest, tests",
-                    "Dockerfile included",
-                    "Demo mode for audit + inspect",
-                  ].map((f) => (
-                    <li key={f} className="flex items-start gap-2">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 text-zinc-500" strokeWidth={2} />
-                      <span className="text-zinc-300">{f}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
+            <div className="mt-14 grid gap-6 sm:grid-cols-2 max-w-3xl mx-auto">
               {/* Personal */}
               <div className="rounded-2xl border border-cyan-500/40 bg-gradient-to-br from-cyan-500/[0.06] via-zinc-900/40 to-zinc-900/40 p-7 ring-1 ring-cyan-500/20">
                 <div className="flex items-center justify-between">
@@ -647,9 +623,6 @@ export default function McpAnvilPage() {
                 >
                   Get personal — $29
                 </Link>
-                <p className="mt-2 text-center text-[11px] text-zinc-500">
-                  14-day refund, no questions
-                </p>
               </div>
 
               {/* Team */}
@@ -681,13 +654,10 @@ export default function McpAnvilPage() {
                 >
                   Get team — $99
                 </Link>
-                <p className="mt-2 text-center text-[11px] text-zinc-500">
-                  14-day refund, no questions
-                </p>
               </div>
             </div>
             <p className="mt-8 text-center text-xs text-zinc-500">
-              VAT/sales tax handled by Polar.sh. 14-day refund on email request.
+              VAT and sales tax handled by Polar.sh as the merchant of record.
             </p>
           </Container>
         </section>
@@ -760,8 +730,8 @@ export default function McpAnvilPage() {
                 One daemon. One dashboard. Every MCP server.
               </h2>
               <p className="mt-4 mx-auto max-w-xl text-zinc-400">
-                Pip-install, run the setup wizard, point Claude at the router.
-                14-day free trial. Activate a license when you're convinced.
+                Pip-install, activate your license, run the setup wizard, point
+                Claude at the router. Done in under five minutes.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <Link

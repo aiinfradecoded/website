@@ -38,6 +38,16 @@ const POLAR_HOBBY_URL =
 const POLAR_PRO_URL =
   process.env.NEXT_PUBLIC_POLAR_PRO_URL ?? PRO_FALLBACK_MAILTO;
 
+// MCP Anvil checkout URLs. Same env-var pattern as the AgentForge tiers
+// above so the page never has a dead link. /mcp-anvil#pricing is the
+// canonical product page; this page just surfaces a quick pick.
+const MCPANVIL_PERSONAL_URL =
+  process.env.NEXT_PUBLIC_POLAR_MCPANVIL_PERSONAL_URL ||
+  "mailto:hello@aiinfradecoded.com?subject=MCP%20Anvil%20Personal%20(%2429)";
+const MCPANVIL_TEAM_URL =
+  process.env.NEXT_PUBLIC_POLAR_MCPANVIL_TEAM_URL ||
+  "mailto:hello@aiinfradecoded.com?subject=MCP%20Anvil%20Team%20(%2499)";
+
 const isPolarUrl = (url: string) => url.startsWith("http");
 const HOBBY_CTA_LABEL = isPolarUrl(POLAR_HOBBY_URL) ? "Buy Hobby — $99" : "Email to buy";
 const PRO_CTA_LABEL = isPolarUrl(POLAR_PRO_URL) ? "Buy Pro — $249" : "Email to buy";
@@ -164,20 +174,21 @@ export default function PricingPage() {
     <>
       <Nav />
       <main>
-        {/* Hero */}
+        {/* Hero — umbrella for both products' pricing. Concise; the
+            individual product sections below carry their own pitch. */}
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 grid-bg pointer-events-none" aria-hidden />
           <Container size="md" className="relative pt-20 pb-12 text-center">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest text-cyan-400">
-              AgentForge pricing
+              Pricing
             </span>
             <h1 className="mt-3 text-balance font-serif text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
               Buy once. Own the stack.
             </h1>
             <p className="mt-5 text-pretty text-lg text-zinc-400">
-              You get the source code and a commercial license. Bring your own API
-              keys, or run it keyless on Ollama or vLLM. No subscriptions, no per-seat
-              fees, and zero of our API keys in your loop.
+              Two products, one philosophy. Pay once, install on your machine,
+              no subscription. Bring your own API keys, or run keyless on
+              Ollama / vLLM.
             </p>
             <ul className="mx-auto mt-7 inline-flex max-w-2xl flex-wrap justify-center gap-x-7 gap-y-2 text-xs text-zinc-500">
               <li className="inline-flex items-center gap-1.5">
@@ -196,8 +207,139 @@ export default function PricingPage() {
           </Container>
         </section>
 
-        {/* Tiers */}
+        {/* MCP Anvil pricing — flagship, comes first. Two tiers
+            (Personal / Team) matching the /mcp-anvil page. */}
+        <Container size="lg" className="pb-12">
+          <div className="mb-8 flex items-baseline justify-between border-b border-zinc-800/60 pb-3">
+            <div>
+              <span className="inline-block text-[11px] font-semibold uppercase tracking-widest text-cyan-400">
+                Flagship
+              </span>
+              <h2 className="mt-1 font-serif text-2xl font-semibold tracking-tight text-zinc-100">
+                MCP Anvil
+              </h2>
+            </div>
+            <Link
+              href="/mcp-anvil"
+              className="text-xs text-cyan-300 hover:text-cyan-200"
+            >
+              Full product page →
+            </Link>
+          </div>
+          <p className="mb-8 max-w-2xl text-sm text-zinc-400">
+            Local MCP daemon, browser dashboard, 64 built-in tools, and a CLI.
+            Import existing servers from Claude Desktop / Code / Cursor with
+            one click.
+          </p>
+          <div className="grid gap-5 sm:grid-cols-2 max-w-3xl">
+            {/* Personal */}
+            <article className="relative flex flex-col rounded-2xl border border-cyan-500/40 bg-gradient-to-br from-cyan-500/[0.06] via-zinc-950 to-zinc-950 p-7 accent-glow">
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full border border-cyan-400/40 bg-cyan-500/10 px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-cyan-300">
+                Most popular
+              </span>
+              <header>
+                <h3 className="font-serif text-xl font-semibold tracking-tight">Personal</h3>
+                <p className="mt-1.5 text-sm text-zinc-400">
+                  Daemon + dashboard + all 64 tools + CLI.
+                </p>
+                <div className="mt-5 flex items-baseline gap-2">
+                  <span className="text-4xl font-semibold tracking-tight text-zinc-50">$29</span>
+                  <span className="text-sm text-zinc-500">one-time</span>
+                </div>
+                <p className="mt-2 text-xs text-zinc-500">1 developer · 1 year of updates.</p>
+              </header>
+              <ul className="my-6 space-y-2.5 text-sm text-zinc-300">
+                {[
+                  "Full daemon + dashboard",
+                  "64 built-in tools, every category",
+                  "Import from Claude Desktop / Code / Cursor",
+                  "Template bundle export / import",
+                  "21-rule audit + live inspect",
+                  "MCP router for Claude integration",
+                ].map((f) => (
+                  <li key={f} className="flex items-start gap-2.5">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" strokeWidth={2.5} />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-auto">
+                <a
+                  href={MCPANVIL_PERSONAL_URL}
+                  className="block w-full rounded-lg bg-cyan-500 px-4 py-2.5 text-center text-sm font-semibold text-zinc-950 transition hover:bg-cyan-400"
+                >
+                  Get personal — $29
+                </a>
+                <p className="mt-2 text-center text-[11px] text-zinc-500">
+                  Secure checkout via <span className="underline">Polar</span> · instant access
+                </p>
+              </div>
+            </article>
+
+            {/* Team */}
+            <article className="relative flex flex-col rounded-2xl border border-zinc-800/50 bg-zinc-900/40 p-7 hover:border-zinc-700 transition">
+              <header>
+                <h3 className="font-serif text-xl font-semibold tracking-tight">Team</h3>
+                <p className="mt-1.5 text-sm text-zinc-400">
+                  Everything in Personal, plus 5 seats.
+                </p>
+                <div className="mt-5 flex items-baseline gap-2">
+                  <span className="text-4xl font-semibold tracking-tight text-zinc-50">$99</span>
+                  <span className="text-sm text-zinc-500">one-time</span>
+                </div>
+                <p className="mt-2 text-xs text-zinc-500">Up to 5 developers · 1 year of updates.</p>
+              </header>
+              <ul className="my-6 space-y-2.5 text-sm text-zinc-300">
+                {[
+                  "Everything in Personal",
+                  "5 developer seats",
+                  "Priority audit-rule additions",
+                  "Direct email support",
+                  "1 year of updates",
+                ].map((f) => (
+                  <li key={f} className="flex items-start gap-2.5">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-zinc-500" strokeWidth={2.5} />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-auto">
+                <a
+                  href={MCPANVIL_TEAM_URL}
+                  className="block w-full rounded-lg border border-zinc-800/50 bg-zinc-950 px-4 py-2.5 text-center text-sm font-medium text-zinc-100 transition hover:border-zinc-700 hover:bg-zinc-900"
+                >
+                  Get team — $99
+                </a>
+                <p className="mt-2 text-center text-[11px] text-zinc-500">
+                  Secure checkout via <span className="underline">Polar</span> · instant access
+                </p>
+              </div>
+            </article>
+          </div>
+        </Container>
+
+        {/* AgentForge pricing — secondary product. */}
         <Container size="lg" className="pb-20">
+          <div className="mb-8 flex items-baseline justify-between border-b border-zinc-800/60 pb-3">
+            <div>
+              <span className="inline-block text-[11px] font-semibold uppercase tracking-widest text-zinc-400">
+                Agent stack
+              </span>
+              <h2 className="mt-1 font-serif text-2xl font-semibold tracking-tight text-zinc-100">
+                AgentForge
+              </h2>
+            </div>
+            <Link
+              href="/agentforge"
+              className="text-xs text-cyan-300 hover:text-cyan-200"
+            >
+              Full product page →
+            </Link>
+          </div>
+          <p className="mb-8 max-w-2xl text-sm text-zinc-400">
+            The source-available production stack. FastAPI + Next.js 15 + pgvector.
+            Tier-routed LLM, multi-turn streaming, hybrid RAG, eval harness, billing.
+          </p>
           <div className="grid gap-5 md:grid-cols-3">
             {TIERS.map((tier) => (
               <article
