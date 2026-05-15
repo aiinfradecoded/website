@@ -208,7 +208,8 @@ export default function PricingPage() {
         </section>
 
         {/* MCP Anvil pricing — flagship, comes first. Two tiers
-            (Personal / Team) matching the /mcp-anvil page. */}
+            (Personal / Team) matching the /mcp-anvil page, centered
+            within the lg container so the pair sits visually balanced. */}
         <Container size="lg" className="pb-12">
           <div className="mb-8 flex items-baseline justify-between border-b border-zinc-800/60 pb-3">
             <div>
@@ -226,12 +227,12 @@ export default function PricingPage() {
               Full product page →
             </Link>
           </div>
-          <p className="mb-8 max-w-2xl text-sm text-zinc-400">
+          <p className="mx-auto mb-10 max-w-2xl text-center text-sm text-zinc-400">
             Local MCP daemon, browser dashboard, 64 built-in tools, and a CLI.
             Import existing servers from Claude Desktop / Code / Cursor with
             one click.
           </p>
-          <div className="grid gap-5 sm:grid-cols-2 max-w-3xl">
+          <div className="mx-auto grid max-w-3xl gap-5 sm:grid-cols-2">
             {/* Personal */}
             <article className="relative flex flex-col rounded-2xl border border-cyan-500/40 bg-gradient-to-br from-cyan-500/[0.06] via-zinc-950 to-zinc-950 p-7 accent-glow">
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full border border-cyan-400/40 bg-cyan-500/10 px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-cyan-300">
@@ -276,12 +277,15 @@ export default function PricingPage() {
               </div>
             </article>
 
-            {/* Team */}
+            {/* Team — extra value pitch: more tools, team-built features. */}
             <article className="relative flex flex-col rounded-2xl border border-zinc-800/50 bg-zinc-900/40 p-7 hover:border-zinc-700 transition">
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full border border-zinc-700 bg-zinc-900 px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-zinc-300">
+                Best value
+              </span>
               <header>
                 <h3 className="font-serif text-xl font-semibold tracking-tight">Team</h3>
                 <p className="mt-1.5 text-sm text-zinc-400">
-                  Everything in Personal, plus 5 seats.
+                  Everything in Personal, plus team tooling + roadmap influence.
                 </p>
                 <div className="mt-5 flex items-baseline gap-2">
                   <span className="text-4xl font-semibold tracking-tight text-zinc-50">$99</span>
@@ -292,13 +296,14 @@ export default function PricingPage() {
               <ul className="my-6 space-y-2.5 text-sm text-zinc-300">
                 {[
                   "Everything in Personal",
-                  "5 developer seats",
-                  "Priority audit-rule additions",
-                  "Direct email support",
-                  "1 year of updates",
+                  "5 developer seats — one license file covers your team",
+                  "Team-only tools (multi-user history, shared templates, audit log)",
+                  "Priority audit-rule + built-in-tool additions",
+                  "Direct email support — real reply within 1 business day",
+                  "Vote on the v0.3+ roadmap",
                 ].map((f) => (
                   <li key={f} className="flex items-start gap-2.5">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-zinc-500" strokeWidth={2.5} />
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-zinc-300" strokeWidth={2.5} />
                     <span>{f}</span>
                   </li>
                 ))}
@@ -306,7 +311,7 @@ export default function PricingPage() {
               <div className="mt-auto">
                 <a
                   href={MCPANVIL_TEAM_URL}
-                  className="block w-full rounded-lg border border-zinc-800/50 bg-zinc-950 px-4 py-2.5 text-center text-sm font-medium text-zinc-100 transition hover:border-zinc-700 hover:bg-zinc-900"
+                  className="block w-full rounded-lg border border-zinc-700 bg-zinc-925 px-4 py-2.5 text-center text-sm font-medium text-zinc-100 transition hover:border-zinc-600 hover:bg-zinc-900"
                 >
                   Get team — $99
                 </a>
@@ -316,6 +321,9 @@ export default function PricingPage() {
               </div>
             </article>
           </div>
+          <p className="mx-auto mt-6 max-w-2xl text-center text-[11.5px] text-zinc-500">
+            Team-only features ship as we hit subscriber milestones. Multi-user history, shared templates, and audit log are the first three on deck — buying Team puts your vote at the front of the queue.
+          </p>
         </Container>
 
         {/* AgentForge pricing — secondary product. */}

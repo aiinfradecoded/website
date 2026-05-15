@@ -244,27 +244,15 @@ export default function McpAnvilPage() {
             </div>
 
             {/*
-              Hero visual — real screenshots of the two surfaces, side by
-              side. Left: actual CLI banner output captured from running
-              `mcp-anvil` and rendered as a terminal image. Right: real
-              browser screenshot of the dashboard at 127.0.0.1:7820 taken
-              with Edge headless. Both PNGs live in /public/screenshots/.
-              Stacks vertically on narrow screens.
+              Hero visuals — real screenshots stacked vertically so each
+              one gets full container width. The earlier 2-column layout
+              shrunk both panels to the point that text inside the
+              dashboard screenshot was hard to read; stacking trades
+              vertical space for legibility. Dashboard first since it's
+              the visual story, then CLI.
             */}
-            <div className="mt-14 grid gap-6 lg:grid-cols-2">
-              <div>
-                <div className="mb-2 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest text-zinc-500">
-                  <span className="h-px w-6 bg-cyan-500/40" />
-                  CLI · in your terminal
-                </div>
-                <img
-                  src="/screenshots/cli.png"
-                  alt="MCP Anvil CLI banner — pixel-art anvil logo, version, daemon-running indicator, dashboard URL, and the four get-started commands."
-                  className="w-full rounded-xl border border-zinc-800/70 shadow-2xl shadow-cyan-500/[0.05]"
-                  loading="eager"
-                />
-              </div>
-              <div>
+            <div className="mt-14 space-y-12 max-w-4xl mx-auto">
+              <figure>
                 <div className="mb-2 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest text-zinc-500">
                   <span className="h-px w-6 bg-cyan-500/40" />
                   Dashboard · in your browser
@@ -275,12 +263,27 @@ export default function McpAnvilPage() {
                   className="w-full rounded-xl border border-zinc-800/70 shadow-2xl shadow-cyan-500/[0.05]"
                   loading="eager"
                 />
-              </div>
+                <figcaption className="mt-3 text-center text-xs text-zinc-500">
+                  Real screenshot of the live dashboard at 127.0.0.1:7820.
+                </figcaption>
+              </figure>
+
+              <figure>
+                <div className="mb-2 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest text-zinc-500">
+                  <span className="h-px w-6 bg-cyan-500/40" />
+                  CLI · in your terminal
+                </div>
+                <img
+                  src="/screenshots/cli.png"
+                  alt="MCP Anvil CLI banner — pixel-art anvil logo, version, daemon-running indicator, dashboard URL, and four get-started commands."
+                  className="w-full rounded-xl border border-zinc-800/70 shadow-2xl shadow-cyan-500/[0.05]"
+                  loading="eager"
+                />
+                <figcaption className="mt-3 text-center text-xs text-zinc-500">
+                  What you see when you type <code className="font-mono text-zinc-300">mcp-anvil</code>. Same daemon, same tool catalog — the CLI for scripts, the dashboard for exploration.
+                </figcaption>
+              </figure>
             </div>
-            <p className="mt-6 text-center text-xs text-zinc-500">
-              Same daemon. Same tool catalog. Use whichever interface fits
-              the task — the CLI for scripts, the dashboard for exploration.
-            </p>
           </Container>
         </section>
 
@@ -625,38 +628,45 @@ export default function McpAnvilPage() {
                 </Link>
               </div>
 
-              {/* Team */}
-              <div className="rounded-2xl border border-zinc-800/70 bg-zinc-900/40 p-7">
+              {/* Team — extra value pitch beyond the seat count. */}
+              <div className="relative rounded-2xl border border-zinc-700/70 bg-zinc-900/50 p-7">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full border border-zinc-700 bg-zinc-900 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-zinc-300">
+                  Best value
+                </span>
                 <h3 className="font-serif text-xl font-semibold">Team</h3>
                 <div className="mt-2 flex items-baseline gap-1">
                   <span className="text-4xl font-semibold">$99</span>
                   <span className="text-sm text-zinc-500">one-time</span>
                 </div>
                 <p className="mt-3 text-sm text-zinc-400">
-                  Everything in Personal, plus 5 seats.
+                  Everything in Personal, plus team tooling + roadmap influence.
                 </p>
                 <ul className="mt-6 space-y-2.5 text-sm">
                   {[
-                    "5 developer seats",
-                    "Priority audit-rule additions",
-                    "Direct email support",
-                    "1 year of updates",
+                    "5 developer seats (one license, your whole team)",
+                    "Team-only tools (multi-user history, shared templates, audit log)",
+                    "Priority audit-rule + built-in-tool additions",
+                    "Direct email support — real reply within 1 business day",
+                    "Vote on the v0.3+ roadmap",
                   ].map((f) => (
                     <li key={f} className="flex items-start gap-2">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 text-zinc-500" strokeWidth={2} />
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 text-zinc-300" strokeWidth={2} />
                       <span className="text-zinc-300">{f}</span>
                     </li>
                   ))}
                 </ul>
                 <Link
                   href={POLAR_TEAM_URL}
-                  className="mt-7 inline-flex w-full items-center justify-center rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-zinc-100 transition hover:bg-zinc-800"
+                  className="mt-7 inline-flex w-full items-center justify-center rounded-lg border border-zinc-700 bg-zinc-925 px-4 py-2.5 text-sm font-semibold text-zinc-100 transition hover:bg-zinc-900"
                 >
                   Get team — $99
                 </Link>
               </div>
             </div>
-            <p className="mt-8 text-center text-xs text-zinc-500">
+            <p className="mx-auto mt-6 max-w-2xl text-center text-[11.5px] text-zinc-500">
+              Team-only features ship as we hit subscriber milestones. Multi-user history, shared templates, and audit log are the first three on deck — buying Team puts your vote at the front of the queue.
+            </p>
+            <p className="mt-3 text-center text-xs text-zinc-500">
               VAT and sales tax handled by Polar.sh as the merchant of record.
             </p>
           </Container>
