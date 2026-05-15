@@ -21,7 +21,9 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+import { CliMockup } from "@/app/_components/CliMockup";
 import { Container } from "@/app/_components/Container";
+import { DashboardMockup } from "@/app/_components/DashboardMockup";
 import { Footer } from "@/app/_components/Footer";
 import { Nav } from "@/app/_components/Nav";
 
@@ -34,80 +36,96 @@ const POLAR_TEAM_URL =
   process.env.NEXT_PUBLIC_POLAR_MCPANVIL_TEAM_URL ||
   "mailto:hello@aiinfradecoded.com?subject=MCP%20Anvil%20Team%20(%2499)";
 
-// What you actually get — five top-level pieces. The product is bigger than
-// the original 3-command CLI; this grid is how we tell that story without
-// drowning the buyer in feature soup.
+// What you actually get — five top-level pieces. Ordered by what
+// a buyer cares about, not what we built first. 64 tools leads
+// because that's the actual leverage; daemon + dashboard + CLI are
+// the surfaces; router is the integration story.
 const PILLARS = [
   {
-    icon: Server,
-    name: "Local daemon",
+    icon: Wrench,
+    name: "64 tools ready to call",
     blurb:
-      "A long-lived process on 127.0.0.1:7820. Hosts every MCP server you register, exposes a stable REST + WebSocket API, and broadcasts live tool-call events. One address for every LLM client to talk to.",
+      "Read files, parse PDFs and spreadsheets, scrape pages, probe ports, hash secrets, count lines of code — every utility your LLM reaches for, already installed. Skip the 'wait, I need a tool that does X' detour.",
+  },
+  {
+    icon: Server,
+    name: "Local daemon, one address",
+    blurb:
+      "All your MCP servers run under one local process on 127.0.0.1:7820. Claude Desktop, Claude Code, OpenAI, your own scripts — they all talk to the same place. No more re-registering servers in every client.",
   },
   {
     icon: Layers,
     name: "Browser dashboard",
     blurb:
-      "A no-install web UI on the same port. Browse tools, call them from forms, manage prompts, audit history, import templates, read connection guides — all without leaving the browser.",
-  },
-  {
-    icon: Wrench,
-    name: "64 built-in tools",
-    blurb:
-      "Filesystem, shell, HTTP, git, docs (PDF/Excel/CSV/JSON/YAML/TOML), networking (DNS/ports/SSL/scraping), system (CPU/memory/PowerShell), security (hashing/JWT/secret-scanning), and dev helpers. Out of the box.",
+      "Point-and-click everything: try a tool from a form, watch its response in real time, manage prompts, import templates, browse call history. Useful when you want to see what's happening, not type it.",
   },
   {
     icon: Terminal,
-    name: "Branded CLI",
+    name: "CLI for the keyboard people",
     blurb:
-      "Pixel-art logo, interactive setup wizard, every command Rich-formatted with consistent vocabulary. Run mcp-anvil to see your daemon state + dashboard URL at a glance.",
+      "Same tools, scriptable from any shell. Pipe results into your own scripts, hit endpoints from CI, set up the whole thing with `mcp-anvil setup` — the dashboard URL is one click away when you want it.",
   },
   {
     icon: Network,
-    name: "MCP router",
+    name: "Plug into Claude with one entry",
     blurb:
-      "One bridge entry in your Claude Desktop / Claude Code config wires every daemon-managed tool into the host. Tool catalog refreshes live — no Claude restart for new tools.",
+      "One line in your Claude Desktop / Claude Code config exposes every daemon-managed tool inside the LLM. Add a new tool later? It shows up in Claude on the next message — no restart, no re-config.",
   },
 ];
 
-// The 64-tool catalog, grouped. Categories are buyer-facing concepts that
-// map directly to anvil-builtin's source files.
+// The 64-tool catalog. Each card describes the OUTCOMES a buyer can
+// get from the category, not the tool names. (The tool names are
+// implementation detail; what matters is whether the LLM can do the
+// job.) Sample-tool lists are kept on a faint trailing line so the
+// curious developer can confirm specific names exist.
 const TOOL_CATEGORIES = [
   {
     icon: FileText,
-    name: "Core filesystem & process",
+    name: "Read + run, anywhere on disk",
     count: 7,
-    examples: "fs_read · fs_glob · fs_grep · shell_exec · http_fetch · git_status · run_pytest",
+    blurb:
+      "Read any file, glob and grep across a tree, fire a shell command, hit an HTTP endpoint, check git status, run pytest. The basic 'navigate this codebase' kit your LLM agent needs before it does anything else.",
+    sample: "fs_read · fs_glob · fs_grep · shell_exec · http_fetch · git_status · run_pytest",
   },
   {
     icon: Box,
-    name: "Document parsing",
+    name: "Pull text + data out of any file",
     count: 12,
-    examples: "pdf_extract · excel_read · csv_read · json_pretty · json_query (mini-jq) · yaml/toml/ini · markdown_to_text · image_metadata · file_signature",
+    blurb:
+      "Extract text from PDFs and pages of Excel sheets. Parse CSV / JSON / YAML / TOML / INI / Markdown. Sniff a file's real type from its magic bytes. Read image dimensions without loading the image. Feed structured data straight into the LLM instead of forcing it to OCR.",
+    sample: "pdf_extract · excel_read · csv_read · json_query (mini-jq) · markdown_to_text · image_metadata · file_signature",
   },
   {
     icon: Globe,
-    name: "Networking & web",
+    name: "Answer 'is this URL alive?'",
     count: 11,
-    examples: "dns_lookup · port_check · common_ports · ssl_cert_info · http_health · header_security_check · web_scrape · web_extract_links · robots_txt",
+    blurb:
+      "DNS lookups, TCP port checks (single port or common-services sweep), SSL cert inspection, HTTP latency probes, security-header audits, page scraping with title + meta + links extracted. Diagnose the live state of any endpoint in one tool call.",
+    sample: "dns_lookup · port_check · ssl_cert_info · http_health · header_security_check · web_scrape · robots_txt",
   },
   {
     icon: Cpu,
-    name: "System & processes",
+    name: "Inspect the machine the daemon runs on",
     count: 9,
-    examples: "system_info · system_health · env_get (auto-mask secrets) · process_list · powershell_exec · run_command · disk_usage · env_path · which",
+    blurb:
+      "CPU / memory / disk usage. Process list with filtering. Env-var read with auto-masked secrets (so SECRET_KEY doesn't leak into your LLM's context). Cross-platform: native PowerShell on Windows, regular shell on Mac / Linux, same API.",
+    sample: "system_info · system_health · env_get · process_list · powershell_exec · disk_usage · which",
   },
   {
     icon: Shield,
-    name: "Security & encoding",
+    name: "Encode, hash, audit, generate",
     count: 13,
-    examples: "base64 · url_encode · hash_text/file · hmac_sign · jwt_decode · find_secrets (AWS/GH/Slack/Stripe/OpenAI patterns) · entropy_check · regex_test · uuid · random_string",
+    blurb:
+      "Base64 / URL encode round-trips. SHA-256 + HMAC for any string or file. JWT decode (sees the claims without trusting the signature). Secret scanning for the dozen patterns that actually leak (AWS, GitHub, Slack, Stripe, OpenAI, Anthropic, Google). Cryptographically secure UUIDs + random strings.",
+    sample: "base64 · hash_text/file · hmac_sign · jwt_decode · find_secrets · entropy_check · regex_test · uuid",
   },
   {
     icon: CircuitBoard,
-    name: "Developer workflow",
+    name: "Survey a codebase fast",
     count: 12,
-    examples: "detect_language · code_count · find_todos · git_log/diff/branch · text_diff · file_diff · json_schema_validate · timestamp_now · fs_stat · fs_tree",
+    blurb:
+      "Detect the language of any file. Count lines + blanks + comments per language across a tree. Find every TODO / FIXME / HACK comment. Browse git log + diff + branches without leaving the LLM. Validate a JSON document against a JSON Schema. Diff any two files or strings.",
+    sample: "detect_language · code_count · find_todos · git_log · git_diff · file_diff · json_schema_validate · fs_tree",
   },
 ];
 
@@ -200,7 +218,7 @@ export default function McpAnvilPage() {
             <div className="text-center">
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/[0.06] px-3 py-1 text-xs font-medium text-cyan-300">
                 <Sparkles className="h-3 w-3" strokeWidth={2.25} />
-                v0.2.0 · 64 built-in tools · 303 tests
+                v0.2.0 · 64 built-in tools · daemon + dashboard + CLI
               </div>
               <h1 className="text-balance font-serif text-4xl font-semibold tracking-tight sm:text-5xl">
                 MCP Anvil —
@@ -236,67 +254,33 @@ export default function McpAnvilPage() {
             </div>
 
             {/*
-              Hero visual — the new CLI banner. Replaces the audit-output
-              mock since the daemon + dashboard is the bigger story now.
-              Pixel-anvil + wordmark + status block, mirrors what a buyer
-              sees when they type `mcp-anvil` in their terminal.
+              Hero visual — two surfaces side by side: CLI on the left,
+              dashboard on the right. Tells the buyer in one glance that
+              this is BOTH a terminal tool AND a browser dashboard, same
+              data behind both. The labels above each panel make the
+              point explicit ("CLI" / "Dashboard"). Stacks vertically on
+              narrow screens since both panels need horizontal room.
             */}
-            <div className="mt-14 mx-auto max-w-3xl">
-              <div className="rounded-xl border border-zinc-800/70 bg-zinc-950 shadow-2xl shadow-cyan-500/[0.05] overflow-hidden">
-                <div className="flex items-center gap-2 border-b border-zinc-800/70 bg-zinc-900/60 px-4 py-2.5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-green-500/70" />
-                  <span className="ml-3 font-mono text-[11px] text-zinc-500">
-                    ~ — mcp-anvil
-                  </span>
+            <div className="mt-14 grid gap-6 lg:grid-cols-2">
+              <div>
+                <div className="mb-2 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest text-zinc-500">
+                  <span className="h-px w-6 bg-cyan-500/40" />
+                  CLI · in your terminal
                 </div>
-                <pre className="px-6 py-5 font-mono text-[12.5px] leading-[1.7] text-zinc-300">
-                  <span className="text-cyan-400">▼ mcp-anvil</span>{"\n"}
-                  <span className="text-cyan-600">┌──────────────────────────────────────────────────────┐</span>{"\n"}
-                  <span className="text-cyan-600">│</span>{"  "}
-                  <span className="text-cyan-300">▗▄▄▄▄▄▄▄▄▄▄▄▄▄▄▖</span>{"    "}
-                  <span className="font-semibold text-cyan-300">M C P   A N V I L</span>{"        "}
-                  <span className="text-cyan-600">│</span>{"\n"}
-                  <span className="text-cyan-600">│</span>{"  "}
-                  <span className="text-cyan-300">▐ ╲▔▔▔▔▔▔▔▔▔▔╱ ▌</span>{"    "}
-                  <span className="text-zinc-400">Build, audit, and orchestrate MCP servers locally.</span>{"  "}
-                  <span className="text-cyan-600">│</span>{"\n"}
-                  <span className="text-cyan-600">│</span>{"  "}
-                  <span className="text-cyan-300">▐  ╲ ▆▆▆▆▆▆ ╱  ▌</span>{"                                              "}
-                  <span className="text-cyan-600">│</span>{"\n"}
-                  <span className="text-cyan-600">│</span>{"  "}
-                  <span className="text-cyan-300">▐   ╲ ▆██▆ ╱   ▌</span>{"    "}
-                  <span className="text-zinc-200">v0.2.0  </span>
-                  <span className="text-zinc-600">•</span>{"  "}
-                  <span className="text-green-400">●</span>
-                  <span className="text-zinc-200"> daemon running  </span>
-                  <span className="text-cyan-600">│</span>{"\n"}
-                  <span className="text-cyan-600">│</span>{"  "}
-                  <span className="text-cyan-300">▐    ╲▆▆▆▆╱    ▌</span>{"    "}
-                  <span className="text-zinc-500">dashboard:  </span>
-                  <span className="underline text-cyan-400">http://127.0.0.1:7820</span>{"  "}
-                  <span className="text-cyan-600">│</span>{"\n"}
-                  <span className="text-cyan-600">│</span>{"  "}
-                  <span className="text-cyan-300">▐     ╲  ╱     ▌</span>{"                                              "}
-                  <span className="text-cyan-600">│</span>{"\n"}
-                  <span className="text-cyan-600">│</span>{"  "}
-                  <span className="text-cyan-300">▐      ╲╱      ▌</span>{"                                              "}
-                  <span className="text-cyan-600">│</span>{"\n"}
-                  <span className="text-cyan-600">│</span>{"  "}
-                  <span className="text-cyan-300">▝▀▀▀▀▀▀▀▀▀▀▀▀▀▀▘</span>{"                                              "}
-                  <span className="text-cyan-600">│</span>{"\n"}
-                  <span className="text-cyan-600">└──────────────────────────────────────────────────────┘</span>{"\n\n"}
-                  <span className="text-cyan-500">── GET STARTED ─────────────────────────────────────────────</span>{"\n"}
-                  {"  "}<span className="font-semibold text-cyan-300">mcp-anvil setup</span>{"          "}<span className="text-zinc-300">Interactive first-run wizard</span>{"\n"}
-                  {"  "}<span className="font-semibold text-cyan-300">mcp-anvil new &lt;name&gt;</span>{"     "}<span className="text-zinc-300">Scaffold a new MCP server</span>{"\n"}
-                  {"  "}<span className="font-semibold text-cyan-300">mcp-anvil daemon start</span>{"   "}<span className="text-zinc-300">Start the daemon + open dashboard</span>{"\n"}
-                </pre>
+                <CliMockup />
               </div>
-              <p className="mt-3 text-center text-xs text-zinc-500">
-                The CLI on first run. Branded banner. Live daemon state. One-click dashboard.
-              </p>
+              <div>
+                <div className="mb-2 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest text-zinc-500">
+                  <span className="h-px w-6 bg-cyan-500/40" />
+                  Dashboard · in your browser
+                </div>
+                <DashboardMockup />
+              </div>
             </div>
+            <p className="mt-6 text-center text-xs text-zinc-500">
+              Same daemon. Same tool catalog. Use whichever interface fits
+              the task — the CLI for scripts, the dashboard for exploration.
+            </p>
           </Container>
         </section>
 
@@ -354,39 +338,114 @@ export default function McpAnvilPage() {
               </p>
             </div>
             <div className="mt-14 grid gap-5 sm:grid-cols-2">
-              {TOOL_CATEGORIES.map(({ icon: Icon, name, count, examples }) => (
+              {TOOL_CATEGORIES.map(({ icon: Icon, name, count, blurb, sample }) => (
                 <div
                   key={name}
                   className="rounded-xl border border-zinc-800/70 bg-zinc-900/40 p-6"
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3">
-                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-800/50 bg-zinc-950 text-cyan-400">
+                      <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-zinc-800/50 bg-zinc-950 text-cyan-400">
                         <Icon className="h-4 w-4" strokeWidth={1.75} />
                       </span>
                       <h3 className="font-serif text-base font-semibold text-zinc-100">
                         {name}
                       </h3>
                     </div>
-                    <span className="rounded-md bg-cyan-500/10 px-2 py-0.5 font-mono text-xs font-semibold text-cyan-300">
+                    <span className="shrink-0 rounded-md bg-cyan-500/10 px-2 py-0.5 font-mono text-xs font-semibold text-cyan-300">
                       {count}
                     </span>
                   </div>
-                  <p className="mt-4 font-mono text-[11.5px] leading-relaxed text-zinc-400">
-                    {examples}
+                  <p className="mt-4 text-[13px] leading-relaxed text-zinc-300">
+                    {blurb}
+                  </p>
+                  <p className="mt-3 font-mono text-[10.5px] leading-relaxed text-zinc-600">
+                    {sample}
                   </p>
                 </div>
               ))}
             </div>
-            <p className="mt-8 text-center text-xs text-zinc-500">
-              Plus a <code className="rounded bg-zinc-900 px-1 py-0.5 font-mono text-cyan-400">+ New tool</code> form
-              in the dashboard. Write Python; reload runs automatically.
-            </p>
+          </Container>
+        </section>
+
+        {/* Build your own tools — the "need something specific?" pitch.
+            Lives right after the 64-tool catalog so the buyer's first
+            thought after scanning the categories ("does it cover MY
+            use case?") gets answered immediately. */}
+        <section className="surface-alt py-20 sm:py-24">
+          <Container size="lg">
+            <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,460px)] lg:items-center">
+              <div>
+                <span className="inline-block text-xs font-semibold uppercase tracking-widest text-cyan-400">
+                  Need something specific?
+                </span>
+                <h2 className="mt-3 text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+                  Build a custom tool in seconds.
+                </h2>
+                <p className="mt-5 text-zinc-400">
+                  Hit <strong className="text-zinc-200">+ New tool</strong> in the
+                  dashboard. Pick a name. Paste a Python function (or skip — we
+                  scaffold a working one). Click Save. The tool reloads live,
+                  shows up in Claude on the next message, and runs against
+                  whatever input the LLM passes it.
+                </p>
+                <p className="mt-4 text-zinc-400">
+                  Want it on a different server? Custom tools register against
+                  anvil's managed catalog by default, but the same Python file
+                  drops cleanly into any MCP server you build — the function
+                  signature IS the MCP tool schema. Write once, register
+                  anywhere.
+                </p>
+                <ul className="mt-7 grid gap-2.5">
+                  {[
+                    "No build step. No deploy. No restart of Claude.",
+                    "Python function in → MCP tool out. The signature IS the schema.",
+                    "Edit + Save in the dashboard hot-reloads anvil-custom in place.",
+                    "Same file works as a standalone MCP server too.",
+                  ].map((line) => (
+                    <li key={line} className="flex items-start gap-2.5 text-[13.5px] text-zinc-300">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" strokeWidth={2.25} />
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Code mockup — what a real custom tool looks like. Tight,
+                  realistic, no boilerplate. */}
+              <div>
+                <div className="rounded-xl border border-zinc-800/70 bg-zinc-950 shadow-2xl shadow-cyan-500/[0.05] overflow-hidden">
+                  <div className="flex items-center gap-2 border-b border-zinc-800/70 bg-zinc-900/60 px-4 py-2.5">
+                    <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-green-500/70" />
+                    <span className="ml-3 font-mono text-[10.5px] text-zinc-500">
+                      ~/.mcp-anvil/tools/custom/weather.py
+                    </span>
+                  </div>
+                  <pre className="px-5 py-4 font-mono text-[12px] leading-[1.65] text-zinc-300 overflow-x-auto">
+                    <span className="text-zinc-500">"""Current weather for a city — added in 30s."""</span>{"\n"}
+                    <span className="text-cyan-400">import</span>{" "}<span className="text-zinc-200">httpx</span>{"\n"}
+                    {"\n"}
+                    <span className="text-cyan-400">async def</span>{" "}
+                    <span className="text-zinc-100 font-semibold">weather</span>(<span className="text-zinc-200">city</span>: <span className="text-emerald-300">str</span>) -&gt; <span className="text-emerald-300">dict</span>:{"\n"}
+                    {"    "}<span className="text-zinc-500">"""Look up current weather for {`{`}city{`}`}."""</span>{"\n"}
+                    {"    "}<span className="text-zinc-200">r</span> = <span className="text-cyan-400">await</span> <span className="text-zinc-200">httpx.AsyncClient().get</span>({"\n"}
+                    {"        "}<span className="text-emerald-300">f"https://wttr.in/{`{`}city{`}`}?format=j1"</span>{"\n"}
+                    {"    "}){"\n"}
+                    {"    "}<span className="text-cyan-400">return</span> <span className="text-zinc-200">r.json()[</span><span className="text-emerald-300">"current_condition"</span><span className="text-zinc-200">][</span><span className="text-emerald-300">0</span><span className="text-zinc-200">]</span>{"\n"}
+                  </pre>
+                  <div className="border-t border-zinc-800/70 bg-zinc-900/40 px-4 py-2 text-[10.5px] text-zinc-500">
+                    Save → anvil reloads → Claude sees <span className="font-mono text-cyan-400">weather</span> on its next call.
+                  </div>
+                </div>
+              </div>
+            </div>
           </Container>
         </section>
 
         {/* Import existing servers */}
-        <section className="surface-alt py-20 sm:py-24">
+        <section className="py-20 sm:py-24">
           <Container size="lg">
             <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
               <div>
@@ -639,8 +698,8 @@ export default function McpAnvilPage() {
             <div className="grid gap-6 sm:grid-cols-4">
               {[
                 { value: "64", label: "built-in tools", note: "6 categories, ship by default" },
-                { value: "21", label: "audit rules", note: "12 static + 9 runtime" },
-                { value: "303", label: "tests", note: "unit + stress + integration" },
+                { value: "21", label: "audit rules", note: "12 static + 9 runtime, grounded in research" },
+                { value: "8", label: "dashboard tabs", note: "servers · tools · templates · prompts · …" },
                 { value: "4", label: "import sources", note: "Claude Desktop / Code / Cursor / local" },
               ].map((stat) => (
                 <div
