@@ -66,11 +66,11 @@ export default function ThanksPage() {
               <div className="rounded-xl border border-zinc-800/70 bg-zinc-900/40 p-6">
                 <Terminal className="h-5 w-5 text-cyan-400" strokeWidth={1.75} />
                 <h3 className="mt-3 text-sm font-semibold text-zinc-100">
-                  While you wait
+                  Install while you wait
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                  Install now and start the 14-day trial. Your license will
-                  unlock when activated.
+                  Run <code className="rounded bg-zinc-950 px-1 text-[11px] text-cyan-400">pipx install mcp-anvil</code> now —
+                  paste the activation key the moment it lands.
                 </p>
               </div>
             </div>
