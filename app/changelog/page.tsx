@@ -4,14 +4,14 @@ import { Nav } from "@/app/_components/Nav";
 
 export const metadata = {
   title: "Changelog",
-  description: "Release notes for AI Infra Decoded products — MCP Anvil + AgentForge.",
+  description: "Release notes for AI Infra Decoded products — MCP Anvil + Agent Forge.",
   alternates: { canonical: "/changelog" },
 };
 
 interface Release {
   // Product tag drives the colored chip + filtering. New entries should
   // be added at the top of the list (newest first).
-  product: "MCP Anvil" | "AgentForge";
+  product: "MCP Anvil" | "Agent Forge";
   version: string;
   date: string;
   tone: "release" | "patch";
@@ -21,6 +21,26 @@ interface Release {
 }
 
 const RELEASES: Release[] = [
+  {
+    product: "Agent Forge",
+    version: "v2.0-rebrand",
+    date: "2026-05-18",
+    tone: "release",
+    title: "Agent Forge — full repositioning + Anvil + Forge bundle",
+    body:
+      "AgentForge becomes Agent Forge — repositioned from a generic AI infrastructure boilerplate into the local agent workbench that sits on top of MCP Anvil's tool catalog. Source-available, pairs with MCP Anvil, $49 personal / $149 team. New bundle SKU saves $19 (personal) or $49 (team) when bought together.",
+    items: [
+      "New positioning: local agent workbench, not generic SaaS boilerplate",
+      "Pairs with MCP Anvil — reads its tool catalog over the same OAuth-gated REST surface Claude Desktop uses",
+      "5 capabilities: agent definition · runtime · dashboard · multi-agent orchestration · eval + tracing",
+      "Source-available so buyers can audit the autonomous code loops before they run them",
+      "Works against any MCP server, not just MCP Anvil — pairing is optimization, not requirement",
+      "New pricing: $49 personal / $149 team (was $99 / $249 for the old AgentForge boilerplate)",
+      "New bundle: $59 personal / $199 team — both products under one license, save $19 / $49",
+      "Six example agent recipes documented (Code Auditor, Issue Triager, Commit Crafter, URL Investigator, PDF Summarizer, Build Watcher)",
+      "Pricing page rebuilt around the two products + bundle, with an Anvil-vs-Forge comparison table",
+    ],
+  },
   {
     product: "MCP Anvil",
     version: "v0.2.0",
@@ -43,7 +63,7 @@ const RELEASES: Release[] = [
     ],
   },
   {
-    product: "AgentForge",
+    product: "Agent Forge",
     version: "v1.0.0",
     date: "2026-04-15",
     tone: "release",
@@ -63,7 +83,7 @@ const RELEASES: Release[] = [
     ],
   },
   {
-    product: "AgentForge",
+    product: "Agent Forge",
     version: "v0.9.0",
     date: "2026-03-22",
     tone: "release",
@@ -79,7 +99,7 @@ const RELEASES: Release[] = [
     ],
   },
   {
-    product: "AgentForge",
+    product: "Agent Forge",
     version: "v0.8.0",
     date: "2026-03-01",
     tone: "release",
@@ -111,7 +131,7 @@ export default function ChangelogPage() {
             </h1>
             <p className="mt-5 max-w-xl text-pretty text-lg text-zinc-400">
               Every shipped release across AI Infra Decoded products — MCP Anvil
-              and AgentForge. Patches and minor updates are included with the
+              and Agent Forge. Patches and minor updates are included with the
               original purchase per your tier's update window.
             </p>
           </Container>

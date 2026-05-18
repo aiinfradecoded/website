@@ -14,7 +14,7 @@ import { Logo } from "./Logo";
 const links = [
   { href: "/" as const, label: "Home" },
   { href: "/mcp-anvil" as const, label: "MCP Anvil" },
-  { href: "/agentforge" as const, label: "AgentForge" },
+  { href: "/agentforge" as const, label: "Agent Forge" },
   { href: "/pricing" as const, label: "Pricing" },
   { href: "/demo" as const, label: "Demo" },
   { href: "/changelog" as const, label: "Changelog" },
@@ -73,7 +73,7 @@ export function Nav() {
         <div className="flex items-center gap-3">
           {/*
             Context-aware top-right CTA. Three states:
-              - on /agentforge: "Get AgentForge" (zinc-white CTA)
+              - on /agentforge: "Get Agent Forge" (zinc-white CTA)
               - on /mcp-anvil:  "Get MCP Anvil"  (cyan primary CTA)
               - elsewhere:      "Get MCP Anvil"  (cyan — flagship default)
             Cross-page selling stays disabled — a buyer on a product page
@@ -84,7 +84,7 @@ export function Nav() {
               href="/agentforge#pricing"
               className="hidden rounded-lg bg-zinc-100 px-3.5 py-1.5 text-sm font-medium text-zinc-950 transition hover:bg-white sm:inline-flex"
             >
-              Get AgentForge
+              Get Agent Forge
             </Link>
           ) : (
             <Link

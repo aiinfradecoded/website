@@ -25,17 +25,17 @@ import { Nav } from "@/app/_components/Nav";
 
 // Home is a products gateway. The page leads with MCP Anvil (flagship,
 // since it's the bigger story now: daemon + dashboard + 64 built-in tools
-// + CLI), then introduces AgentForge as the heavier production-stack
+// + CLI), then introduces Agent Forge as the heavier production-stack
 // boilerplate. Each product gets its own card-and-CTA section before the
 // shared "trust pillars + about" footer block, so a buyer landing here
 // from search can identify which product they want in <5s of scrolling.
 
 export const metadata = {
   title: {
-    absolute: "AI Infra Decoded · MCP Anvil + AgentForge",
+    absolute: "AI Infra Decoded · MCP Anvil + Agent Forge",
   },
   description:
-    "Production AI infrastructure tooling. MCP Anvil — a local MCP daemon + dashboard + 64 built-in tools. AgentForge — source-available agent stack with FastAPI + Next.js. Both run on your infra, both work with your API keys.",
+    "Production AI infrastructure tooling. MCP Anvil — a local MCP daemon + dashboard + 64 built-in tools. Agent Forge — source-available agent stack with FastAPI + Next.js. Both run on your infra, both work with your API keys.",
   alternates: { canonical: "/" },
 };
 
@@ -67,13 +67,14 @@ const MCP_ANVIL_PILLARS = [
   { icon: Globe, name: "One-click import", note: "Claude Desktop / Code / Cursor" },
 ];
 
-// AgentForge teaser — kept short. The full pitch lives at /agentforge.
+// Agent Forge teaser — kept short. The full pitch lives at /agentforge.
 const AGENTFORGE_HIGHLIGHTS = [
-  "Tier-routed LLM (frontier / local-large / local-small) with automatic fallback",
-  "Multi-turn streaming chat over SSE, persisted to your Postgres",
-  "Hybrid pgvector + pg_trgm RAG — no Pinecone, no Weaviate bill",
-  "LLM-judge eval harness with CI gate · 360+ tests",
-  "Self-hosted Langfuse observability included",
+  "Define agents in the dashboard — system prompt + tools + model",
+  "Tools come from MCP Anvil's catalog (or any MCP server you have)",
+  "Run locally as a chat endpoint with streaming + memory",
+  "Span-based traces show every tool call + LLM decision",
+  "Eval harness with CI gate · catches regressions before deploy",
+  "Source-available · audit, fork, modify under commercial license",
 ];
 
 const TRUST_PILLARS = [
@@ -121,11 +122,12 @@ export default function Home() {
                 </span>
               </h1>
               <p className="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-zinc-400">
-                <strong className="text-zinc-200">MCP Anvil</strong> is a local
-                MCP toolbox — daemon, dashboard, 64 built-in tools.{" "}
-                <strong className="text-zinc-200">AgentForge</strong> is the
-                source-available agent stack that drives real production
-                traffic. Both run on your infra. Both work with your API keys.
+                <strong className="text-zinc-200">MCP Anvil</strong> hosts the
+                tools — local daemon, dashboard, 64 built-in.{" "}
+                <strong className="text-zinc-200">Agent Forge</strong> wields
+                them — source-available agent workbench on top of Anvil&apos;s
+                catalog. Buy both for $59 (save $19) or pick the one that
+                fits today.
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-3">
                 <Link
@@ -139,7 +141,7 @@ export default function Home() {
                   href="/agentforge"
                   className="inline-flex items-center gap-2 rounded-lg border border-zinc-800/50 bg-zinc-900/40 px-5 py-3 text-sm font-medium text-zinc-100 transition hover:border-zinc-700 hover:bg-zinc-900"
                 >
-                  See AgentForge
+                  See Agent Forge
                 </Link>
               </div>
               <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs text-zinc-500">
@@ -253,7 +255,7 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* AgentForge section — secondary. Same shape as MCP Anvil section
+      {/* Agent Forge section — secondary. Same shape as MCP Anvil section
           for visual rhyme, but zinc instead of cyan accents so it reads
           as "and also, this other thing" rather than competing. */}
       <section id="agentforge" className="py-20 sm:py-24">
@@ -263,7 +265,7 @@ export default function Home() {
               <div className="rounded-2xl border border-zinc-800/60 bg-gradient-to-br from-zinc-900/60 to-zinc-950 p-7">
                 <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-400">
                   <CircuitBoard className="h-4 w-4" />
-                  The agent stack
+                  The agent workbench
                 </div>
                 <ul className="mt-5 space-y-3">
                   {AGENTFORGE_HIGHLIGHTS.map((line) => (
@@ -277,31 +279,31 @@ export default function Home() {
             </div>
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/60 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-zinc-400">
-                Production stack
+                Agent workbench
               </span>
               <h2 className="mt-4 text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-                AgentForge — the agent boilerplate behind it.
+                Agent Forge — agents on your tools.
               </h2>
               <p className="mt-5 text-pretty text-zinc-400">
-                Skip the 1–2 weeks of plumbing every AI app needs. Tier-routed
-                LLM, multi-turn streaming, hybrid RAG, eval harness with CI
-                gate, observability, billing. FastAPI 0.115 + Next.js 15 +
-                pgvector. The same code path that drives our own production
-                traffic, source-available under a commercial license.
+                Define a system prompt, pick the tools the agent can call
+                (from MCP Anvil&apos;s 64-tool catalog or any MCP server
+                you have), pick the model. The local runtime hosts it as a
+                chat endpoint with streaming, memory, traces, and eval.
+                Source-available — read it, fork it, ship it.
               </p>
               <div className="mt-7 flex flex-wrap items-center gap-3">
                 <Link
                   href="/agentforge"
                   className="inline-flex items-center gap-2 rounded-lg bg-zinc-100 px-5 py-2.5 text-sm font-semibold text-zinc-950 transition hover:bg-white"
                 >
-                  See AgentForge
+                  See Agent Forge
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="/demo"
-                  className="inline-flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/40 px-5 py-2.5 text-sm font-medium text-zinc-200 transition hover:border-zinc-700 hover:bg-zinc-900"
+                  href="/pricing#bundle"
+                  className="inline-flex items-center gap-2 rounded-lg border border-cyan-500/40 bg-cyan-500/[0.06] px-5 py-2.5 text-sm font-medium text-cyan-300 transition hover:border-cyan-400/60 hover:bg-cyan-500/10"
                 >
-                  Try the live demo
+                  Bundle with Anvil — $59
                 </Link>
               </div>
             </div>
@@ -362,26 +364,31 @@ export default function Home() {
             <div className="mx-auto max-w-2xl">
               <Boxes className="mx-auto h-10 w-10 text-cyan-400" strokeWidth={1.5} />
               <h2 className="mt-4 text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-                Start with MCP Anvil. Or the demo.
+                Anvil for tools. Forge for agents.
               </h2>
               <p className="mt-4 text-pretty text-zinc-400">
-                MCP Anvil installs in one pip command, runs locally on
-                127.0.0.1:7820, and connects to Claude Desktop with a single
-                config entry. The AgentForge demo is a hosted chat — no signup,
-                runs entirely client-side.
+                The bundle is the intended way to buy: $59 personal, $199 team.
+                One license, both products, save $19. Or pick the one that
+                fits today — licenses stack later.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <Link
-                  href="/mcp-anvil"
+                  href="/pricing#bundle"
                   className="rounded-lg bg-cyan-500 px-5 py-3 text-sm font-semibold text-zinc-950 hover:bg-cyan-400"
                 >
-                  Get MCP Anvil — $29
+                  Bundle — $59
                 </Link>
                 <Link
-                  href="/demo"
+                  href="/mcp-anvil"
                   className="rounded-lg border border-zinc-800 bg-zinc-900/60 px-5 py-3 text-sm font-medium text-zinc-100 hover:border-zinc-700 hover:bg-zinc-900"
                 >
-                  Try the AgentForge demo
+                  Just MCP Anvil — $29
+                </Link>
+                <Link
+                  href="/agentforge"
+                  className="rounded-lg border border-zinc-800 bg-zinc-900/60 px-5 py-3 text-sm font-medium text-zinc-100 hover:border-zinc-700 hover:bg-zinc-900"
+                >
+                  Just Agent Forge — $49
                 </Link>
               </div>
             </div>
