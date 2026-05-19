@@ -41,12 +41,31 @@ html, body {
 }
 
 body {
-  /* Single dramatic cyan radial bloom from the upper-right
-     (Linear / Vercel pattern). Stays fixed as the buyer scrolls so
-     every page feels grounded in the same brand wash. */
+  /* Two layered backgrounds, drawn back-to-front in this order:
+       1. (top)    Cyan radial bloom from the upper-right (Linear/Vercel pattern)
+       2. (bottom) Subtle 56px grid pattern matching the dashboard
+
+     Putting both on the body element (rather than a separate fixed-position
+     div with negative z-index) avoids stacking-context glitches that hid
+     the grid on certain pages. The grid now ALWAYS renders behind page
+     content regardless of how nested sections are positioned.
+
+     Both layers use `background-attachment: fixed` so they stay anchored
+     to the viewport as the buyer scrolls — same effect the in-product
+     dashboard uses.
+
+     Grid opacity: 0.13 (lines), against the body's #08080b base. Adjust
+     here for the entire site at once. */
   background-image:
-    radial-gradient(1200px 800px at 92% -8%, rgba(34, 211, 238, 0.14), transparent 60%);
+    radial-gradient(1200px 800px at 92% -8%, rgba(34, 211, 238, 0.14), transparent 60%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.13) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.13) 1px, transparent 1px);
+  background-size:
+    auto,
+    56px 56px,
+    56px 56px;
   background-attachment: fixed;
+  background-repeat: no-repeat, repeat, repeat;
 }
 
 /* Section bg rhythm: alternating subtle lift to chunk the page (Linear style). */

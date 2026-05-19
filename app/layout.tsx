@@ -149,18 +149,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-screen antialiased">
         {/*
-          Site-wide grid background. Lives at the body level so every page
-          inherits it without per-page wiring (was previously per-section,
-          which left utility pages like /license and /privacy without the
-          treatment). Fixed positioning means the grid stays anchored as
-          the buyer scrolls — same effect the dashboard uses.
-
-          The mask radial-gradient in globals.css keeps the grid soft +
-          centered on the top-middle of the viewport so it never competes
-          with text. pointer-events-none + aria-hidden so it doesn't
-          interfere with content or screen readers.
+          Site-wide grid + cyan-bloom backdrop now lives directly on the
+          body element's `background-image` in globals.css (two layered
+          gradients + a base color). No wrapper div needed — the previous
+          fixed-position div with negative z-index was being painted
+          BELOW body's background on some pages (the demo + mcp-anvil
+          pages both had this issue), which is exactly opposite of
+          what we wanted. Painting the grid as a body bg layer means
+          every page inherits the same backdrop, no matter how nested
+          its sections are.
         */}
-        <div className="pointer-events-none fixed inset-0 -z-10 grid-bg-page" aria-hidden />
         {children}
       </body>
     </html>
