@@ -57,31 +57,51 @@ body {
 }
 
 /* Subtle grid pattern. Two variants:
-   - .grid-bg          — strong, masked tight to the top-middle. Use
-                         on hero sections that want the pattern visible.
-   - .grid-bg-page     — softer, viewport-wide, fading to transparent
-                         near the edges. Used at the body level so every
-                         page carries the same backdrop without competing
-                         with per-section grids. */
+   - .grid-bg-page     — sitewide backdrop applied at the body level by
+                         layout.tsx. Every page carries it without each
+                         page having to opt-in. Soft top-to-bottom fade
+                         via mask-image so the grid feels like part of
+                         the cyan radial gradient instead of a flat wall.
+   - .grid-bg          — stronger hero-section accent layered on top of
+                         the page grid. Radial-masked to the top-middle
+                         where heroes live; fades to transparent at the
+                         section's edges so it doesn't compete with
+                         the body grid in adjacent sections.
+
+   Opacity calibrated 2026-05-19: both variants bumped to roughly +50%
+   visibility so the grid reads as a deliberate backdrop on every screen
+   (was: too faint to see except in raking light + on OLED panels). */
 .grid-bg {
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 40%, transparent 90%);
 }
 
 .grid-bg-page {
-  /* Site-wide grid pattern matching the dashboard at 127.0.0.1:7820
-     (same 56px grid, same opacity profile). Fixed-position so it stays
-     anchored as the buyer scrolls. The body's own background-image
-     supplies the upper-right cyan radial glow; this layer is just the
-     grid. No mask — the dashboard doesn't mask its grid either; it
-     reads cleanly edge-to-edge. */
+  /* Sitewide grid pattern. Fixed-position so it stays anchored as the
+     buyer scrolls. The body's own background-image supplies the
+     upper-right cyan radial glow; this layer adds the grid.
+
+     Mask: soft vertical fade so the grid is most visible in the upper
+     half of the viewport (where hero content sits) and dies off near
+     the bottom. Keeps the gradient feel matching the body's radial
+     bloom — the grid emphasizes the radial rather than fighting it.
+
+     Opacity 0.13 — clearly visible without being intrusive. The
+     dashboard at 127.0.0.1:7820 uses the same value. */
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.085) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.085) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.13) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.13) 1px, transparent 1px);
   background-size: 56px 56px;
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 1) 30%,
+    rgba(0, 0, 0, 0.85) 70%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
 }
 
 
