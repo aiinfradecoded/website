@@ -1,6 +1,6 @@
 import "./globals.css";
 import "highlight.js/styles/github-dark.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter_Tight, JetBrains_Mono, Source_Serif_4 } from "next/font/google";
 
 const sans = Inter_Tight({
@@ -43,6 +43,12 @@ export const metadata: Metadata = {
     description:
       "MCP Anvil + Agent Forge. Source-available, bring-your-own-keys, no subscriptions.",
   },
+};
+
+export const viewport: Viewport = {
+  // Mobile browser chrome tint — matches the --color-bg base so the address
+  // bar blends into the dark page instead of flashing white on scroll.
+  themeColor: "#08080b",
 };
 
 // JSON-LD Organization schema — tells Google we're a known organization
@@ -122,6 +128,16 @@ const BUNDLE_LD = {
   publisher: { "@type": "Organization", name: "AI Infra Decoded" },
 };
 
+// Cloudflare Web Analytics — cookieless, privacy-friendly pageview/referrer
+// data. We need it to see registry + launch referral traffic actually land
+// (the Phase 1 marketing KPI). The beacon renders only when a token is present
+// at build time, so an unconfigured build ships no broken beacon. Get the
+// token from the Cloudflare dashboard: Analytics & Logs -> Web Analytics ->
+// (your site) -> the JS snippet's data-cf-beacon token. Provide it as the
+// NEXT_PUBLIC_CF_BEACON_TOKEN build env var (e.g. .env.local locally, or the
+// Cloudflare build/deploy variables) — same pattern as NEXT_PUBLIC_SITE_URL.
+const CF_BEACON_TOKEN = process.env.NEXT_PUBLIC_CF_BEACON_TOKEN;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${sans.variable} ${mono.variable} ${serif.variable}`}>
@@ -146,6 +162,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(BUNDLE_LD) }}
         />
+        {/* Cloudflare Web Analytics beacon — only emitted when the token env
+            var is set (see CF_BEACON_TOKEN above). Cookieless, no consent
+            banner required. */}
+        {CF_BEACON_TOKEN ? (
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={JSON.stringify({ token: CF_BEACON_TOKEN })}
+          />
+        ) : null}
       </head>
       <body className="min-h-screen antialiased">
         {/*

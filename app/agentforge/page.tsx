@@ -504,7 +504,41 @@ export default function AgentForgePage() {
           </Container>
         </section>
 
+        {/* BreadcrumbList structured data — Home > Agent Forge, so Google can
+            render a breadcrumb trail in the result instead of the bare URL. */}
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://aiinfradecoded.com" },
+                { "@type": "ListItem", position: 2, name: "Agent Forge", item: "https://aiinfradecoded.com/agentforge" },
+              ],
+            }),
+          }}
+        />
+
         {/* FAQ */}
+        {/* FAQPage structured data — built from the same FAQ array rendered
+            below, so it can't drift from the visible Q&A. */}
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: FAQ.map((item) => ({
+                "@type": "Question",
+                name: item.q,
+                acceptedAnswer: { "@type": "Answer", text: item.a },
+              })),
+            }),
+          }}
+        />
         <section className="py-20 sm:py-24">
           <Container size="lg">
             <div className="text-center">

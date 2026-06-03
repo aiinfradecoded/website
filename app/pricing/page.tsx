@@ -382,6 +382,24 @@ export default function PricingPage() {
         </section>
 
         {/* FAQ */}
+        {/* FAQPage structured data — built from the same FAQ array rendered
+            below, so the markup can never drift from the visible Q&A (Google
+            requires structured-data answers to match on-page content). */}
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: FAQ.map(({ q, a }) => ({
+                "@type": "Question",
+                name: q,
+                acceptedAnswer: { "@type": "Answer", text: a },
+              })),
+            }),
+          }}
+        />
         <section className="surface-alt py-20">
           <Container size="md">
             <h2 className="font-serif text-2xl font-semibold tracking-tight">FAQ</h2>

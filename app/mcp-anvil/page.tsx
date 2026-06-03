@@ -699,7 +699,41 @@ export default function McpAnvilPage() {
           </Container>
         </section>
 
+        {/* BreadcrumbList structured data — Home > MCP Anvil, so Google can
+            render a breadcrumb trail in the result instead of the bare URL. */}
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://aiinfradecoded.com" },
+                { "@type": "ListItem", position: 2, name: "MCP Anvil", item: "https://aiinfradecoded.com/mcp-anvil" },
+              ],
+            }),
+          }}
+        />
+
         {/* FAQ */}
+        {/* FAQPage structured data — built from the same FAQ array rendered
+            below, so it can't drift from the visible Q&A. */}
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: FAQ.map((item) => ({
+                "@type": "Question",
+                name: item.q,
+                acceptedAnswer: { "@type": "Answer", text: item.a },
+              })),
+            }),
+          }}
+        />
         <section className="py-20 sm:py-24">
           <Container size="lg">
             <div className="text-center">
@@ -756,6 +790,37 @@ export default function McpAnvilPage() {
                 >
                   Get team — $99
                 </Link>
+              </div>
+
+              {/* Self-serve editor wiring — one-click deeplinks that add the
+                  anvil MCP server to Cursor / VS Code. They register
+                  `mcp-anvil router`, so they assume Anvil is already installed
+                  and licensed locally (the daemon lives on the user's box).
+                  Deeplink formats verified against the current Cursor + VS Code
+                  MCP install docs. */}
+              <div className="mt-8 border-t border-zinc-800/60 pt-6">
+                <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500">
+                  Already installed? Wire up your editor
+                </p>
+                <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
+                  <a
+                    href="cursor://anysphere.cursor-deeplink/mcp/install?name=anvil&config=eyJjb21tYW5kIjoibWNwLWFudmlsIiwiYXJncyI6WyJyb3V0ZXIiXX0="
+                    className="inline-flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/60 px-4 py-2 text-sm font-medium text-zinc-200 transition hover:bg-zinc-900"
+                  >
+                    Add Anvil to Cursor
+                  </a>
+                  <a
+                    href="vscode:mcp/install?%7B%22name%22%3A%22anvil%22%2C%22command%22%3A%22mcp-anvil%22%2C%22args%22%3A%5B%22router%22%5D%7D"
+                    className="inline-flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/60 px-4 py-2 text-sm font-medium text-zinc-200 transition hover:bg-zinc-900"
+                  >
+                    Add Anvil to VS Code
+                  </a>
+                </div>
+                <p className="mt-3 text-[11.5px] leading-relaxed text-zinc-600">
+                  One click registers the <span className="font-mono text-zinc-500">anvil</span> server
+                  (<span className="font-mono text-zinc-500">mcp-anvil router</span>) in Cursor or VS Code.
+                  Requires MCP Anvil installed and licensed on your machine.
+                </p>
               </div>
             </div>
           </Container>

@@ -1,0 +1,20 @@
+# Cloudflare _headers — applied to the static export served from out/.
+# public/ is copied verbatim into out/ by `next build` (output: "export"),
+# so this file lands at out/_headers, where Cloudflare reads its rules.
+#
+# CSP is intentionally NOT set here yet. The site emits inline JSON-LD
+# (dangerouslySetInnerHTML in app/layout.tsx) and Next injects an inline
+# bootstrap script, so an enforcing Content-Security-Policy needs per-build
+# script hashes or 'unsafe-inline' and MUST be validated against a preview
+# deploy before going live. Tracked as a follow-up.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+# Fingerprinted build assets never change for a given URL — cache hard.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
