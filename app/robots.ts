@@ -13,8 +13,10 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        // /claim is a per-token landing page; no value in indexing it.
-        disallow: "/claim",
+        // Per-token / per-order landing pages. They poll the fulfillment Worker
+        // for license blobs and are already noindex+nofollow; keep crawlers out
+        // of them entirely. (See PROJECT_STATE.md section 3 — license delivery.)
+        disallow: ["/claim", "/thanks", "/mcp-anvil/thanks"],
       },
     ],
     sitemap: "https://aiinfradecoded.com/sitemap.xml",
