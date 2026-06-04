@@ -38,7 +38,7 @@ const POLL_INTERVAL_MS = 2000;
 const POLL_TIMEOUT_MS = 5 * 60 * 1000;
 
 interface OrderRecord {
-  status: "issued" | "pending_email" | "failed";
+  status: "issued" | "pending_email" | "failed" | "expired";
   tier: "personal" | "team";
   product: "mcp-anvil" | "agent-forge" | "bundle";
   seats: number;
@@ -142,6 +142,10 @@ export function LicenseDelivery() {
     return <PendingState elapsedSec={elapsedSec} />;
   }
 
+  if (record.status === "expired") {
+    return <ExpiredState />;
+  }
+
   return <IssuedState record={record} />;
 }
 
@@ -215,6 +219,31 @@ function FatalState({ message }: { message: string }) {
           hello@aiinfradecoded.com
         </a>{" "}
         with your Polar order ID and we&apos;ll resend by hand within the day.
+      </p>
+    </div>
+  );
+}
+
+// ===========================================================================
+// State: link expired (order older than the Worker's self-serve window)
+// ===========================================================================
+
+function ExpiredState() {
+  return (
+    <div className="mt-12 rounded-xl border border-zinc-800/70 bg-zinc-900/40 p-8 text-center">
+      <Clock className="mx-auto h-10 w-10 text-zinc-400" strokeWidth={1.75} />
+      <h2 className="mt-4 font-serif text-2xl font-semibold">This license link has expired.</h2>
+      <p className="mt-3 text-sm leading-relaxed text-zinc-400">
+        For security, this page only shows your license for a short window after
+        purchase. Your license was also emailed to you at checkout — check that
+        inbox (and spam). Still stuck? Email{" "}
+        <a
+          href="mailto:hello@aiinfradecoded.com"
+          className="text-cyan-400 hover:text-cyan-300"
+        >
+          hello@aiinfradecoded.com
+        </a>{" "}
+        with your Polar order ID and we&apos;ll re-send it.
       </p>
     </div>
   );
